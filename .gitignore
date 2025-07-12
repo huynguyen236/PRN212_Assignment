@@ -78,3 +78,4 @@ TestResults/
 *.vspscc
 *.vssscc
 *.orig
+ViolationManagement/ViolationManagement/ViolationManagement.csproj
