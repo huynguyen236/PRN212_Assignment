@@ -1,0 +1,80 @@
+.vs/PRN212_Assignment/v17/DocumentLayout.json
+.vs/PRN212_Assignment/v17/.wsuo
+.vs/slnx.sqlite
+## Build results
+[Bb]in/
+[Oo]bj/
+*.exe
+*.dll
+*.app
+*.log
+
+## User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## VS Code settings (nếu dùng)
+.vscode/
+
+## VS folder
+.vs/
+
+## NuGet
+*.nupkg
+*.snupkg
+*.nuspec
+packages/
+*.symbols.nupkg
+project.lock.json
+project.fragment.lock.json
+
+## Roslyn cache
+*.ide/
+
+## Rider IDE
+.idea/
+
+## ReSharper
+_ReSharper*/
+*.DotSettings.user
+
+## Publish folders
+publish/
+out/
+artifacts/
+
+## Temporary files
+*.tmp
+*.bak
+*.swp
+*.DS_Store
+Thumbs.db
+
+## Windows crash dumps
+*.dmp
+
+## JetBrains Rider
+.idea/
+
+## XAML Designer Cache
+*.cache/
+*.suo
+*.sdf
+
+## Local test results
+TestResults/
+
+## Configuration transforms
+*.config.transform
+
+## Others
+*.dbmdl
+*.pidb
+*.psess
+*.vsp
+*.vspx
+*.vspscc
+*.vssscc
+*.orig
