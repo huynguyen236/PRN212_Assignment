@@ -1,81 +1,59 @@
-.vs/PRN212_Assignment/v17/DocumentLayout.json
-.vs/PRN212_Assignment/v17/.wsuo
-.vs/slnx.sqlite
-## Build results
-[Bb]in/
-[Oo]bj/
-*.exe
-*.dll
-*.app
-*.log
-
-## User-specific files
-*.user
+## Visual Studio & VSCode
+.vs/
+.vscode/
 *.suo
+*.user
 *.userosscache
 *.sln.docstates
+*.sdf
+*.cache
 
-## VS Code settings (nếu dùng)
-.vscode/
+## VS WPF build artifacts
+[Bb]in/
+[Oo]bj/
+*.g.cs
+*.g.i.cs
+*.i.cs
+*.xaml.cs~
 
-## VS folder
-.vs/
+## SQLite và file tạm
+*.sqlite
+*.dbmdl
+*.tmp
+*.bak
+*.log
 
-## NuGet
+## NuGet & .NET
+packages/
 *.nupkg
 *.snupkg
-*.nuspec
-packages/
 *.symbols.nupkg
 project.lock.json
 project.fragment.lock.json
 
-## Roslyn cache
-*.ide/
-
-## Rider IDE
+## JetBrains Rider / ReSharper
 .idea/
-
-## ReSharper
 _ReSharper*/
 *.DotSettings.user
 
-## Publish folders
-publish/
-out/
-artifacts/
-
-## Temporary files
-*.tmp
-*.bak
-*.swp
-*.DS_Store
-Thumbs.db
-
-## Windows crash dumps
-*.dmp
-
-## JetBrains Rider
-.idea/
-
-## XAML Designer Cache
-*.cache/
-*.suo
-*.sdf
-
-## Local test results
+## XAML Designer / Test
 TestResults/
-
-## Configuration transforms
-*.config.transform
-
-## Others
-*.dbmdl
-*.pidb
+*.vspscc
+*.vssscc
 *.psess
 *.vsp
 *.vspx
-*.vspscc
-*.vssscc
+
+## OS-specific
+Thumbs.db
+.DS_Store
+
+## Others
 *.orig
-ViolationManagement/ViolationManagement/ViolationManagement.csproj
+*.dmp
+*.pidb
+*.psess
+*.config.transform
+artifacts/
+publish/
+out/
