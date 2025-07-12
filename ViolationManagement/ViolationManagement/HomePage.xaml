@@ -6,15 +6,14 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanMinimize">
 
-    <DockPanel>
+     <DockPanel>
 
-        <!-- Taskbar Menu -->
+         <!-- Taskbar Menu -->
         <Grid DockPanel.Dock="Top" Background="#B71C1C" Height="45">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-
             <TextBlock Text="🚦 Violation App"
                        Foreground="White"
                        FontWeight="Bold"
@@ -78,5 +77,5 @@
             </StackPanel>
         </ScrollViewer>
 
-    </DockPanel>
+    </DockPanel> 
 </Window>

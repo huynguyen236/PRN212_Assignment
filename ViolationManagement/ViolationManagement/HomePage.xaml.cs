@@ -23,5 +23,22 @@ namespace ViolationManagement
         {
             InitializeComponent();
         }
+
+        private void OpenHome(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void OpenLookup(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void OpenRegister(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void OpenLogin(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

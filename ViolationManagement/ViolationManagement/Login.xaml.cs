@@ -28,5 +28,46 @@ namespace ViolationManagement
         {
 
         }
+
+        private void Login_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OpenHome(object sender, RoutedEventArgs e)
+        {
+            var home = new HomePage();
+            home.Show();
+            this.Close();
+        }
+
+        private void OpenLookup(object sender, RoutedEventArgs e)
+        {
+            //var lookup = new LookupPage();
+            //lookup.Show();
+            //this.Close();
+        }
+
+        private void OpenRegister(object sender, RoutedEventArgs e)
+        {
+            // đang ở trang Register
+        }
+
+        private void OpenLogin(object sender, RoutedEventArgs e)
+        {
+            var login = new Login();
+            login.Show();
+            this.Close();
+        }
+
+        private void ForgotPassword_Click(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void OpenRegister_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
