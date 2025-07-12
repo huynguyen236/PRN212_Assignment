@@ -1,11 +1,10 @@
-﻿<Window x:Class="ViolationManagement.Login"
+﻿<Window x:Class="ViolationManagement.RegisterPage"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Đăng nhập - Violation App"
+        Title="Đăng ký - Violation App"
         Height="600" Width="900"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanMinimize">
-
     <DockPanel>
 
         <!-- Taskbar Menu -->
@@ -37,9 +36,9 @@
         <!-- Main Content -->
         <ScrollViewer>
             <StackPanel Background="#F0F0F0" Margin="20">
-                <Border Background="White" CornerRadius="10" Padding="30" Margin="0,50,0,0">
-                    <StackPanel VerticalAlignment="Center">
-                        <TextBlock Text="🔐 Đăng nhập"
+                <Border Background="White" CornerRadius="10" Padding="30" Margin="0,20,0,0">
+                    <StackPanel>
+                        <TextBlock Text="📝 Đăng ký tài khoản"
                                    FontSize="24"
                                    FontWeight="Bold"
                                    Foreground="#0D47A1"
@@ -49,38 +48,41 @@
                         <!-- Email -->
                         <StackPanel Margin="0,10">
                             <TextBlock Text="Email:" FontWeight="SemiBold"/>
-                            <TextBox x:Name="txtEmail" Height="30" />
+                            <TextBox x:Name="EmailTextBox" Height="30" />
+                        </StackPanel>
+
+                        <!-- Phone -->
+                        <StackPanel Margin="0,10">
+                            <TextBlock Text="Số điện thoại:" FontWeight="SemiBold"/>
+                            <TextBox x:Name="PhoneTextBox" Height="30" />
+                        </StackPanel>
+
+                        <!-- Full Name -->
+                        <StackPanel Margin="0,10">
+                            <TextBlock Text="Họ và tên:" FontWeight="SemiBold"/>
+                            <TextBox x:Name="FullNameTextBox" Height="30" />
                         </StackPanel>
 
                         <!-- Password -->
                         <StackPanel Margin="0,10">
                             <TextBlock Text="Mật khẩu:" FontWeight="SemiBold"/>
-                            <PasswordBox x:Name="txtPassword" Height="30"/>
+                            <PasswordBox x:Name="PasswordBox" Height="30" />
                         </StackPanel>
 
-                        <!-- Forgot Password -->
-                        <TextBlock Text="Quên mật khẩu?"
-                                   Foreground="#1565C0"
-                                   FontSize="12"
-                                   Margin="0,5,0,10"
-                                   Cursor="Hand"
-                                   MouseLeftButtonUp="ForgotPassword_Click"/>
+                        <!-- Confirm Password -->
+                        <StackPanel Margin="0,10">
+                            <TextBlock Text="Xác nhận mật khẩu:" FontWeight="SemiBold"/>
+                            <PasswordBox x:Name="ConfirmPasswordBox" Height="30" />
+                        </StackPanel>
 
-                        <!-- Confirm Button -->
-                        <Button Content="Xác nhận"
+                        <!-- Register Button -->
+                        <Button Content="Đăng ký"
                                 Background="#0D47A1"
                                 Foreground="White"
                                 FontWeight="Bold"
                                 Height="35"
-                                Margin="0,10,0,5"
-                                Click="Login_Click"/>
-
-                        <!-- Register Button -->
-                        <Button Content="Đăng ký"
-                                Background="#BDBDBD"
-                                Foreground="Black"
-                                Height="30"
-                                Click="OpenRegister_Click"/>
+                                Margin="0,20,0,0"
+                                Click="Register_Click" />
                     </StackPanel>
                 </Border>
 
@@ -92,5 +94,6 @@
                            Margin="0,30,0,0"/>
             </StackPanel>
         </ScrollViewer>
+
     </DockPanel>
 </Window>
