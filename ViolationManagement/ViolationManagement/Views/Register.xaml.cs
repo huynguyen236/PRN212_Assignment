@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
-using ViolationManagement.Controllers;
+using ViolationManagement.Controller;
 using ViolationManagement.Models;
 
 namespace ViolationManagement.Views
@@ -9,7 +9,7 @@ namespace ViolationManagement.Views
     public partial class RegisterPage : Window
     {
         private readonly ViolationManagementContext _context = new ViolationManagementContext();
-        private readonly RegisterController _controller = new();
+        private readonly RegisterControllers _controller = new();
         public RegisterPage()
         {
             InitializeComponent();

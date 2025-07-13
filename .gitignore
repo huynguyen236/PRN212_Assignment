@@ -57,3 +57,5 @@ Thumbs.db
 artifacts/
 publish/
 out/
+ViolationManagement/ViolationManagement/appsettings.json
+ViolationManagement/ViolationManagement/ViolationManagement.csproj

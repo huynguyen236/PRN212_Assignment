@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ViolationManagement.Models;
 
 namespace ViolationManagement
 {
@@ -19,6 +20,19 @@ namespace ViolationManagement
         public MainWindow()
         {
             InitializeComponent();
+        }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                using var db = new ViolationManagementContext();
+                var count = db.Users.Count(); // Thử truy vấn đơn giản
+                MessageBox.Show($"✅ Kết nối thành công! Số người dùng: {count}", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"❌ Kết nối thất bại!\nChi tiết: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
