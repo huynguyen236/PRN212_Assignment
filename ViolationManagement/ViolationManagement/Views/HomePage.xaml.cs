@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ViolationManagement
+namespace ViolationManagement.Views
 {
     /// <summary>
     /// Interaction logic for HomePage.xaml
@@ -34,11 +34,14 @@ namespace ViolationManagement
         }
         private void OpenRegister(object sender, RoutedEventArgs e)
         {
-
+            RegisterPage registerWindow = new RegisterPage();
+            registerWindow.ShowDialog(); // Hoặc Show() nếu không muốn chặn
         }
+
         private void OpenLogin(object sender, RoutedEventArgs e)
         {
-
+            Login loginWindow = new Login();
+            loginWindow.ShowDialog(); // Hoặc Show()
         }
     }
 }
