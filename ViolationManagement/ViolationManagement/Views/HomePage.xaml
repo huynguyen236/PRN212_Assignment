@@ -4,78 +4,128 @@
         Title="Trang chủ - Violation App"
         Height="600" Width="900"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="CanMinimize">
+        ResizeMode="CanMinimize"
+        Background="#F5F5F5">
 
-     <DockPanel>
+    <DockPanel>
 
-         <!-- Taskbar Menu -->
-        <Grid DockPanel.Dock="Top" Background="#B71C1C" Height="45">
+        <!-- Taskbar -->
+        <Grid DockPanel.Dock="Top" Background="#B71C1C" Height="50">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <TextBlock Text="🚦 Violation App"
-                       Foreground="White"
-                       FontWeight="Bold"
-                       FontSize="16"
-                       VerticalAlignment="Center"
-                       Margin="10,0,0,0"
-                       Grid.Column="0"/>
 
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Center"
-                        Grid.Column="1"
-                        Margin="0,0,10,0">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,0">
+                <TextBlock Text="🚦 Violation App" 
+                           Foreground="White" 
+                           FontWeight="Bold" 
+                           FontSize="18"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0">
                 <Button Content="🏠 Trang chủ" Click="OpenHome" Style="{StaticResource NavButtonStyle}" />
-                <Button Content="📄 Tra cứu vi phạm" Click="OpenLookup" Style="{StaticResource NavButtonStyle}" />
+                <Button Content="📄 Tra cứu" Click="OpenLookup" Style="{StaticResource NavButtonStyle}" />
                 <Button Content="📝 Đăng ký" Click="OpenRegister" Style="{StaticResource NavButtonStyle}" />
                 <Button Content="🔐 Đăng nhập" Click="OpenLogin" Style="{StaticResource NavButtonStyle}" />
+                <Button Content="🚪 Đăng xuất" Click="Logout" Style="{StaticResource NavButtonStyle}" />
+
             </StackPanel>
         </Grid>
 
         <!-- Main Content -->
         <ScrollViewer>
-            <StackPanel Background="#F0F0F0" Margin="20">
+            <StackPanel Margin="20">
 
-                <!-- Banner -->
-                <Border Height="200" Background="#90CAF9" CornerRadius="10" Margin="0,10">
-                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock
-                                   FontSize="22"
+                <!-- Welcome Section -->
+                <Border Background="#0D47A1" CornerRadius="12" Padding="20" Margin="0,10" >
+                    <StackPanel>
+                        <TextBlock x:Name="WelcomeText"
+                                   Foreground="White"
+                                   FontSize="24"
                                    FontWeight="Bold"
-                                   Foreground="White"
-                                   TextAlignment="Center"/>
-                        <TextBlock Text="Phản ánh vi phạm giao thông"
-                                   FontSize="28"
-                                   FontWeight="ExtraBold"
-                                   Foreground="White"
-                                   Margin="0,5,0,0"
                                    TextAlignment="Center"/>
                     </StackPanel>
                 </Border>
 
-                <!-- Features -->
-                <TextBlock Text="✨ Tính năng nổi bật" 
-                           FontSize="20" FontWeight="SemiBold" 
-                           Foreground="#0D47A1"
-                           Margin="0,20,0,10"/>
+                <!-- Role Panels -->
+                <StackPanel Orientation="Vertical" Margin="0,10">
+                    <StackPanel x:Name="AdminPanel" Visibility="Collapsed">
+                        <Border Background="#FF7043" CornerRadius="10" Padding="10" Margin="0,5">
+                            <TextBlock Text="🔧 Quản trị viên: Quản lý hệ thống" Foreground="White" FontWeight="SemiBold"/>
+                        </Border>
+                    </StackPanel>
 
-                <StackPanel Orientation="Vertical" Background="White">
-                    <TextBlock Text="✔️ Gửi phản ánh vi phạm kèm hình ảnh hoặc video." Margin="0,5" FontSize="14"/>
-                    <TextBlock Text="✔️ Xem trạng thái xử lý phản ánh nhanh chóng." Margin="0,5" FontSize="14"/>
-                    <TextBlock Text="✔️ Cảnh sát xác minh và gửi thông báo xử lý." Margin="0,5" FontSize="14"/>
-                    <TextBlock Text="✔️ Người vi phạm có thể phản hồi và nộp phạt online." Margin="0,5" FontSize="14"/>
+                    <StackPanel x:Name="PolicePanel" Visibility="Collapsed">
+                        <Border Background="#29B6F6" CornerRadius="10" Padding="10" Margin="0,5">
+                            <TextBlock Text="👮 Cảnh sát: Xử lý vi phạm" Foreground="White" FontWeight="SemiBold"/>
+                        </Border>
+                    </StackPanel>
+
+                    <StackPanel x:Name="CitizenPanel" Visibility="Collapsed">
+                        <Border Background="#66BB6A" CornerRadius="10" Padding="10" Margin="0,5">
+                            <TextBlock Text="💼 Công dân: Gửi phản ánh, theo dõi vi phạm" Foreground="White" FontWeight="SemiBold"/>
+                        </Border>
+                    </StackPanel>
                 </StackPanel>
 
+                <!-- Features Section -->
+                <TextBlock Text="✨ Tính năng nổi bật" 
+                           FontSize="20" 
+                           FontWeight="SemiBold" 
+                           Foreground="#0D47A1" 
+                           Margin="0,20,0,10"/>
+
+                <WrapPanel Orientation="Horizontal" ItemWidth="400" ItemHeight="80">
+                    <Border Background="White" CornerRadius="10" Padding="10" Margin="5">
+                        <Border.Effect>
+                            <DropShadowEffect Color="Gray" BlurRadius="8" ShadowDepth="2"/>
+                        </Border.Effect>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock Text="📷" FontSize="24" Margin="0,0,10,0"/>
+                            <TextBlock Text="Gửi phản ánh vi phạm kèm hình ảnh/video." FontSize="14" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="White" CornerRadius="10" Padding="10" Margin="5">
+                        <Border.Effect>
+                            <DropShadowEffect Color="Gray" BlurRadius="8" ShadowDepth="2"/>
+                        </Border.Effect>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock Text="🔍" FontSize="24" Margin="0,0,10,0"/>
+                            <TextBlock Text="Xem trạng thái xử lý phản ánh." FontSize="14" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="White" CornerRadius="10" Padding="10" Margin="5">
+                        <Border.Effect>
+                            <DropShadowEffect Color="Gray" BlurRadius="8" ShadowDepth="2"/>
+                        </Border.Effect>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock Text="👮" FontSize="24" Margin="0,0,10,0"/>
+                            <TextBlock Text="Cảnh sát xác minh và gửi thông báo." FontSize="14" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="White" CornerRadius="10" Padding="10" Margin="5">
+                        <Border.Effect>
+                            <DropShadowEffect Color="Gray" BlurRadius="8" ShadowDepth="2"/>
+                        </Border.Effect>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock Text="💳" FontSize="24" Margin="0,0,10,0"/>
+                            <TextBlock Text="Nộp phạt online dễ dàng." FontSize="14" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                </WrapPanel>
+
                 <!-- Footer -->
-                <TextBlock Text="Phiên bản 1.0 - Violation App © 2024" 
-                           FontSize="12" 
-                           Foreground="Gray" 
+                <TextBlock Text="Phiên bản 1.0 - Violation App © 2024"
+                           FontSize="12"
+                           Foreground="Gray"
                            HorizontalAlignment="Center"
                            Margin="0,30,0,0"/>
             </StackPanel>
         </ScrollViewer>
 
-    </DockPanel> 
+    </DockPanel>
 </Window>

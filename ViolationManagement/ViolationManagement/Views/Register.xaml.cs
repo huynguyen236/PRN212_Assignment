@@ -1,15 +1,13 @@
-﻿using System.Linq;
-using System.Text.RegularExpressions;
-using System.Windows;
+﻿using System.Windows;
 using ViolationManagement.Controllers;
-using ViolationManagement.Models;
+using ViolationManagement.Helper;
 
 namespace ViolationManagement.Views
 {
     public partial class RegisterPage : Window
     {
-        private readonly ViolationManagementContext _context = new ViolationManagementContext();
         private readonly RegisterController _controller = new();
+
         public RegisterPage()
         {
             InitializeComponent();
@@ -27,7 +25,7 @@ namespace ViolationManagement.Views
 
             if (success)
             {
-                MessageBox.Show("Đăng ký thành công!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Đăng ký thành công! Vui lòng đăng nhập.", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
                 new Login().Show();
                 this.Close();
             }
@@ -36,7 +34,6 @@ namespace ViolationManagement.Views
                 MessageBox.Show(message, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
- 
 
         private void OpenHome(object sender, RoutedEventArgs e)
         {
@@ -47,20 +44,26 @@ namespace ViolationManagement.Views
 
         private void OpenLookup(object sender, RoutedEventArgs e)
         {
-            //var lookup = new LookupPage();
-            //lookup.Show();
-            //this.Close();
+            MessageBox.Show("Chức năng đang được phát triển.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void OpenRegister(object sender, RoutedEventArgs e)
         {
-            // đang ở trang Register
+           // nothing
         }
 
         private void OpenLogin(object sender, RoutedEventArgs e)
         {
             var login = new Login();
             login.Show();
+            this.Close();
+        }
+
+        private void Logout(object sender, RoutedEventArgs e)
+        {
+            UserSession.Logout();
+            var home = new HomePage();
+            home.Show();
             this.Close();
         }
     }
