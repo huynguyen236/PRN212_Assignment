@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+using System.IO;
 
 namespace ViolationManagement.Models;
 
@@ -25,9 +27,17 @@ public partial class ViolationManagementContext : DbContext
 
     public virtual DbSet<Violation> Violations { get; set; }
 
+    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=DESKTOP-D77R1TJ;uid=sa;password=123;database=Violation_Management;Encrypt=True;TrustServerCertificate=True;");
+    {
+        var builder = new ConfigurationBuilder();
+        builder.SetBasePath(Directory.GetCurrentDirectory());
+        builder.AddJsonFile("appsettings.json", true, true);
+        var configuration = builder.Build();
+        optionsBuilder.UseSqlServer(configuration.GetConnectionString("Default"));
+    }
+    //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+    //        => optionsBuilder.UseSqlServer("Server=DESKTOP-D77R1TJ;uid=sa;password=123;database=Violation_Management;Encrypt=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
