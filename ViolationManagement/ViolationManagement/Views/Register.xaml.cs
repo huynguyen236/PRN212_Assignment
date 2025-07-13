@@ -11,6 +11,19 @@ namespace ViolationManagement.Views
         public RegisterPage()
         {
             InitializeComponent();
+
+            if (UserSession.IsLoggedIn)
+            {
+                BtnRegister.Visibility = Visibility.Collapsed;
+                BtnLogin.Visibility = Visibility.Collapsed;
+                BtnLogout.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                BtnRegister.Visibility = Visibility.Visible;
+                BtnLogin.Visibility = Visibility.Visible;
+                BtnLogout.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void Register_Click(object sender, RoutedEventArgs e)

@@ -14,6 +14,19 @@ namespace ViolationManagement.Views
         public Login()
         {
             InitializeComponent();
+
+            if (UserSession.IsLoggedIn)
+            {
+                BtnRegister.Visibility = Visibility.Collapsed;
+                BtnLogin.Visibility = Visibility.Collapsed;
+                BtnLogout.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                BtnRegister.Visibility = Visibility.Visible;
+                BtnLogin.Visibility = Visibility.Visible;
+                BtnLogout.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)

@@ -22,6 +22,10 @@ namespace ViolationManagement.Views
 
                 WelcomeText.Text = $"Xin chào, {name}!";
 
+                BtnRegister.Visibility = Visibility.Collapsed;
+                BtnLogin.Visibility = Visibility.Collapsed;
+                BtnLogout.Visibility = Visibility.Visible;
+
                 switch (role)
                 {
                     case "Admin":
@@ -38,6 +42,9 @@ namespace ViolationManagement.Views
             else
             {
                 WelcomeText.Text = "Xin chào, khách!";
+                BtnRegister.Visibility = Visibility.Visible;
+                BtnLogin.Visibility = Visibility.Visible;
+                BtnLogout.Visibility = Visibility.Collapsed;
             }
         }
 
