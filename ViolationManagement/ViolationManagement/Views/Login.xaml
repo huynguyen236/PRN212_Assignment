@@ -43,10 +43,10 @@
                                    TextAlignment="Center"
                                    Margin="0,0,0,20"/>
 
-                        <!-- Email -->
+                        <!-- CCCD -->
                         <StackPanel Margin="0,10">
-                            <TextBlock Text="Email:" FontWeight="SemiBold"/>
-                            <TextBox x:Name="txtEmail" Height="30" />
+                            <TextBlock Text="Mã số Căn cước công dân:" FontWeight="SemiBold"/>
+                            <TextBox x:Name="txtCCCD" Height="30" />
                         </StackPanel>
 
                         <!-- Password -->

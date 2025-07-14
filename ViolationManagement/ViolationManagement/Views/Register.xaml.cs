@@ -28,13 +28,16 @@ namespace ViolationManagement.Views
 
         private void Register_Click(object sender, RoutedEventArgs e)
         {
+            string cccd = CCCDTextBox.Text.Trim();
             string email = EmailTextBox.Text.Trim();
             string phone = PhoneTextBox.Text.Trim();
             string fullName = FullNameTextBox.Text.Trim();
+            string gender = GenderComboBox.Text;
+            string address = AddressTextBox.Text.Trim();
             string password = PasswordBox.Password;
             string confirmPassword = ConfirmPasswordBox.Password;
 
-            bool success = _controller.Register(email, phone, fullName, password, confirmPassword, out string message);
+            bool success = _controller.Register(cccd, email, phone, fullName, gender, address, password, confirmPassword, out string message);
 
             if (success)
             {
@@ -78,6 +81,11 @@ namespace ViolationManagement.Views
             var home = new HomePage();
             home.Show();
             this.Close();
+        }
+
+        private void GenderComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
