@@ -7,29 +7,26 @@
         ResizeMode="CanMinimize">
     <DockPanel>
 
-        <!-- Taskbar Menu -->
-        <Grid DockPanel.Dock="Top" Background="#B71C1C" Height="45">
+        <!-- Taskbar -->
+        <Grid DockPanel.Dock="Top" Background="#B71C1C" Height="50">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <TextBlock Text="🚦 Violation App"
-                       Foreground="White"
-                       FontWeight="Bold"
-                       FontSize="16"
-                       VerticalAlignment="Center"
-                       Margin="10,0,0,0"
-                       Grid.Column="0"/>
 
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Center"
-                        Grid.Column="1"
-                        Margin="0,0,10,0">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,0">
+                <TextBlock Text="🚦 Violation App" 
+                    Foreground="White" 
+                    FontWeight="Bold" 
+                    FontSize="18"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0">
                 <Button Content="🏠 Trang chủ" Click="OpenHome" Style="{StaticResource NavButtonStyle}" />
-                <Button Content="📄 Tra cứu vi phạm" Click="OpenLookup" Style="{StaticResource NavButtonStyle}" />
-                <Button Content="📝 Đăng ký" Click="OpenRegister" Style="{StaticResource NavButtonStyle}" />
-                <Button Content="🔐 Đăng nhập" Click="OpenLogin" Style="{StaticResource NavButtonStyle}" />
+                <Button Content="📄 Tra cứu" Click="OpenLookup" Style="{StaticResource NavButtonStyle}" />
+                <Button x:Name="BtnRegister" Content="📝 Đăng ký" Click="OpenRegister" Style="{StaticResource NavButtonStyle}" />
+                <Button x:Name="BtnLogin" Content="🔐 Đăng nhập" Click="OpenLogin" Style="{StaticResource NavButtonStyle}" />
+                <Button x:Name="BtnLogout" Content="🚪 Đăng xuất" Click="Logout" Style="{StaticResource NavButtonStyle}" />
             </StackPanel>
         </Grid>
 

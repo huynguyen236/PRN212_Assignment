@@ -1,8 +1,11 @@
 ﻿
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Text.RegularExpressions;
 using System.Windows;
 using ViolationManagement.Models;
+using ViolationManagement.Views;
 
 namespace ViolationManagement.Controllers
 {
@@ -44,6 +47,12 @@ namespace ViolationManagement.Controllers
                 return false;
             }
 
+            if(_context.Users.Any(u => u.Phone == phone))
+            {
+                message = "Số điện thoại đã tồn tại. Vui lòng dùng số điện thoại khác.";
+                return false;
+            }  
+
             // Check password khớp
             if (password != confirmPassword)
             {
@@ -51,20 +60,79 @@ namespace ViolationManagement.Controllers
                 return false;
             }
 
-            // Tạo đối tượng User mới
-            var newUser = new User
+
+            // Tạo mã xác nhận
+            var code = new Random().Next(100000, 999999).ToString();
+
+            // Gửi email
+            bool sent = SendVerificationEmail(email, code, out string error);
+
+            if (!sent)
             {
-                FullName = fullName,
-                Email = email,
-                Phone = phone,
-                Password = password,
-                Role = "Citizen"
-            };
+                message = "Gửi email thất bại: " + error;
+                return false;
+            }
+            else
+            {
+                // Tạo đối tượng User mới
+                var newUser = new User
+                {
+                    FullName = fullName,
+                    Email = email,
+                    Phone = phone,
+                    Password = password,
+                    Role = "Citizen"
+                };
 
-            _context.Users.Add(newUser);
-            _context.SaveChanges();
+                var verifyWindow = new VerificationWindow(code);
+                bool? result = verifyWindow.ShowDialog();
 
-            return true;
+                if (result.HasValue && result == true)
+                {
+                    _context.Users.Add(newUser);
+                    _context.SaveChanges();
+                    message = "Đăng ký thành công!";
+                    return true;
+                }
+                message = "Đăng ký thất bại!";
+
+                return false;
+            }
+
+                
+        }
+
+        private bool SendVerificationEmail(string toEmail, string code, out string error)
+        {
+            try
+            {
+                var fromEmail = "kdodjeksdkkd@gmail.com";
+                var fromPassword = "vuup itfu rwax sckd"; // Phải là App Password của Gmail
+
+                var smtp = new SmtpClient("smtp.gmail.com", 587)
+                {
+                    EnableSsl = true,
+                    Credentials = new NetworkCredential(fromEmail, fromPassword),
+                    Timeout = 10000 // 10 giây timeout
+
+                };
+
+                var message = new MailMessage(fromEmail, toEmail)
+                {
+                    Subject = "Mã xác minh đăng ký tài khoản",
+                    Body = $"Xin chào quý khách,\n\nMã xác minh của bạn là: {code}\n\nVui lòng nhập mã này để hoàn tất việc xác thực email.",
+                    IsBodyHtml = false
+                };
+
+                smtp.Send(message);
+                error = "";
+                return true;
+            }
+            catch (Exception ex)
+            {
+                error = ex.Message;
+                return false;
+            }
         }
     }
 }

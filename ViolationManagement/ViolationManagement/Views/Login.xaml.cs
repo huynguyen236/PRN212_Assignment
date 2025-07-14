@@ -1,37 +1,61 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using ViolationManagement.Controllers;
+using ViolationManagement.Helper;
 
 namespace ViolationManagement.Views
 {
-    /// <summary>
-    /// Interaction logic for Login.xaml
-    /// </summary>
     public partial class Login : Window
     {
+        private readonly LoginController _controller = new();
+
         public Login()
         {
             InitializeComponent();
-        }
 
-        private void txtEmail_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
+            if (UserSession.IsLoggedIn)
+            {
+                BtnRegister.Visibility = Visibility.Collapsed;
+                BtnLogin.Visibility = Visibility.Collapsed;
+                BtnLogout.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                BtnRegister.Visibility = Visibility.Visible;
+                BtnLogin.Visibility = Visibility.Visible;
+                BtnLogout.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
+            string email = txtEmail.Text.Trim();
+            string password = txtPassword.Password;
 
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            {
+                MessageBox.Show("Vui lòng nhập đầy đủ email và mật khẩu.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            var user = _controller.Login(email, password);
+            if (user != null)
+            {
+                // Set thông tin vào session
+                UserSession.SetUser(user.UserId, user.FullName, user.Email, user.Role);
+
+                MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                var home = new HomePage();
+                home.Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Email hoặc mật khẩu không đúng.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void OpenHome(object sender, RoutedEventArgs e)
@@ -43,31 +67,47 @@ namespace ViolationManagement.Views
 
         private void OpenLookup(object sender, RoutedEventArgs e)
         {
-            //var lookup = new LookupPage();
-            //lookup.Show();
-            //this.Close();
+            MessageBox.Show("Chức năng đang được phát triển.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void OpenRegister(object sender, RoutedEventArgs e)
         {
-            // đang ở trang Register
+            var register = new RegisterPage();
+            register.Show();
+            this.Close();
         }
 
         private void OpenLogin(object sender, RoutedEventArgs e)
         {
-            var login = new Login();
-            login.Show();
-            this.Close();
+            // nothing
         }
 
         private void ForgotPassword_Click(object sender, MouseButtonEventArgs e)
         {
-
+            MessageBox.Show("Chức năng đang được phát triển.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void OpenRegister_Click(object sender, RoutedEventArgs e)
         {
+            var register = new RegisterPage();
+            register.Show();
+            this.Close();
+        }
 
+        private void txtEmail_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // Có thể validate real-time nếu muốn
+        }
+
+        private void Logout(object sender, RoutedEventArgs e)
+        {
+            UserSession.Logout();
+
+            MessageBox.Show("Bạn đã đăng xuất.", "Đăng xuất", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            var login = new Login();
+            login.Show();
+            this.Close();
         }
     }
 }
