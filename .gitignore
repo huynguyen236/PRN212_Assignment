@@ -59,3 +59,4 @@ publish/
 out/
 ViolationManagement/ViolationManagement/appsettings.json
 ViolationManagement/ViolationManagement/ViolationManagement.csproj
+ViolationManagement/ViolationManagement/appsettings.json

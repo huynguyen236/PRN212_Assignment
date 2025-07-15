@@ -5,31 +5,48 @@
         Height="600" Width="900"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanMinimize"
+        Loaded="Window_Loaded"
         Background="#F5F5F5">
 
     <DockPanel>
 
         <!-- Taskbar -->
-        <Grid DockPanel.Dock="Top" Background="#B71C1C" Height="50">
+        <Grid DockPanel.Dock="Top" Background="#B71C1C" Height="60">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,0">
+            <!-- Logo -->
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="20,0,0,0">
                 <TextBlock Text="🚦 Violation App" 
                            Foreground="White" 
                            FontWeight="Bold" 
                            FontSize="18"/>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0">
-                <Button Content="🏠 Trang chủ" Click="OpenHome" Style="{StaticResource NavButtonStyle}" />
-                <Button Content="📄 Tra cứu" Click="OpenLookup" Style="{StaticResource NavButtonStyle}" />
-                <Button Content="📝 Đăng ký" Click="OpenRegister" Style="{StaticResource NavButtonStyle}" />
-                <Button Content="🔐 Đăng nhập" Click="OpenLogin" Style="{StaticResource NavButtonStyle}" />
-                <Button Content="🚪 Đăng xuất" Click="Logout" Style="{StaticResource NavButtonStyle}" />
+            <!-- Feature ComboBox (Center) -->
+            <ComboBox x:Name="FeatureComboBox"
+                      Grid.Column="1"
+                      Width="200"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      SelectionChanged="FeatureComboBox_SelectionChanged"
+                      FontSize="14"
+                      Height="35">
+            </ComboBox>
 
+            <!-- Navigation Buttons -->
+            <StackPanel Orientation="Horizontal" 
+                        Grid.Column="2"
+                        HorizontalAlignment="Right" 
+                        VerticalAlignment="Center" 
+                        Margin="0,0,20,0">
+                <Button x:Name="btnHome" Content="🏠 Trang chủ" Click="OpenHome" Style="{StaticResource NavButtonStyle}" Margin="5,0"/>
+                <Button x:Name="btnRegister" Content="📝 Đăng ký" Click="OpenRegister" Style="{StaticResource NavButtonStyle}" Margin="5,0"/>
+                <Button x:Name="btnLogin" Content="🔐 Đăng nhập" Click="OpenLogin" Style="{StaticResource NavButtonStyle}" Margin="5,0"/>
+                <Button x:Name="btnLogout" Content="🚪 Đăng xuất" Click="Logout" Style="{StaticResource NavButtonStyle}" Margin="5,0"/>
             </StackPanel>
         </Grid>
 
