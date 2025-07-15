@@ -14,20 +14,33 @@ namespace ViolationManagement.Views
         public Login()
         {
             InitializeComponent();
+
+            if (UserSession.IsLoggedIn)
+            {
+                BtnRegister.Visibility = Visibility.Collapsed;
+                BtnLogin.Visibility = Visibility.Collapsed;
+                BtnLogout.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                BtnRegister.Visibility = Visibility.Visible;
+                BtnLogin.Visibility = Visibility.Visible;
+                BtnLogout.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            string email = txtEmail.Text.Trim();
+            string cccd = txtCCCD.Text.Trim();
             string password = txtPassword.Password;
 
-            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(cccd) || string.IsNullOrEmpty(password))
             {
-                MessageBox.Show("Vui lòng nhập đầy đủ email và mật khẩu.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Vui lòng nhập đầy đủ CCCD và mật khẩu.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            var user = _controller.Login(email, password);
+            var user = _controller.Login(cccd, password);
             if (user != null)
             {
                 // Set thông tin vào session
@@ -71,7 +84,9 @@ namespace ViolationManagement.Views
 
         private void ForgotPassword_Click(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("Chức năng đang được phát triển.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+            var forgotpassword = new ForgotPassword();
+            forgotpassword.Show();
+            this.Close();
         }
 
         private void OpenRegister_Click(object sender, RoutedEventArgs e)

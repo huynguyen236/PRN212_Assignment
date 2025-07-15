@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -38,12 +38,11 @@ public partial class ViolationManagementContext : DbContext
         var configuration = builder.Build();
         optionsBuilder.UseSqlServer(configuration.GetConnectionString("Default"));
     }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Notification>(entity =>
         {
-            entity.HasKey(e => e.NotificationId).HasName("PK__Notifica__20CF2E32D2C0BD38");
+            entity.HasKey(e => e.NotificationId).HasName("PK__Notifica__20CF2E32E858FACC");
 
             entity.Property(e => e.NotificationId).HasColumnName("NotificationID");
             entity.Property(e => e.IsRead).HasDefaultValue(false);
@@ -66,7 +65,7 @@ public partial class ViolationManagementContext : DbContext
 
         modelBuilder.Entity<Report>(entity =>
         {
-            entity.HasKey(e => e.ReportId).HasName("PK__Reports__D5BD48E597D20C1A");
+            entity.HasKey(e => e.ReportId).HasName("PK__Reports__D5BD48E5C0206D23");
 
             entity.Property(e => e.ReportId).HasColumnName("ReportID");
             entity.Property(e => e.ImageUrl).HasColumnName("ImageURL");
@@ -100,13 +99,20 @@ public partial class ViolationManagementContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCAC4984B2A8");
+            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCAC5FA704B8");
 
-            entity.HasIndex(e => e.Email, "UQ__Users__A9D10534FAC5BA38").IsUnique();
+            entity.HasIndex(e => e.CitizenId, "UQ__Users__6E49FBEDA330A1D7").IsUnique();
+
+            entity.HasIndex(e => e.Email, "UQ__Users__A9D10534887796A8").IsUnique();
 
             entity.Property(e => e.UserId).HasColumnName("UserID");
+            entity.Property(e => e.Address).HasMaxLength(255);
+            entity.Property(e => e.CitizenId)
+                .HasMaxLength(20)
+                .HasColumnName("CitizenID");
             entity.Property(e => e.Email).HasMaxLength(100);
             entity.Property(e => e.FullName).HasMaxLength(100);
+            entity.Property(e => e.Gender).HasMaxLength(10);
             entity.Property(e => e.Password).HasMaxLength(255);
             entity.Property(e => e.Phone).HasMaxLength(15);
             entity.Property(e => e.Role).HasMaxLength(20);
@@ -114,9 +120,9 @@ public partial class ViolationManagementContext : DbContext
 
         modelBuilder.Entity<Vehicle>(entity =>
         {
-            entity.HasKey(e => e.VehicleId).HasName("PK__Vehicles__476B54B25A28E1DE");
+            entity.HasKey(e => e.VehicleId).HasName("PK__Vehicles__476B54B254D24460");
 
-            entity.HasIndex(e => e.PlateNumber, "UQ__Vehicles__03692624DFDBD7DD").IsUnique();
+            entity.HasIndex(e => e.PlateNumber, "UQ__Vehicles__036926245E1E0D42").IsUnique();
 
             entity.Property(e => e.VehicleId).HasColumnName("VehicleID");
             entity.Property(e => e.Brand).HasMaxLength(50);
@@ -127,12 +133,12 @@ public partial class ViolationManagementContext : DbContext
             entity.HasOne(d => d.Owner).WithMany(p => p.Vehicles)
                 .HasForeignKey(d => d.OwnerId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Vehicles__OwnerI__3B75D760");
+                .HasConstraintName("FK__Vehicles__OwnerI__3C69FB99");
         });
 
         modelBuilder.Entity<Violation>(entity =>
         {
-            entity.HasKey(e => e.ViolationId).HasName("PK__Violatio__18B6DC28ADAE2BD2");
+            entity.HasKey(e => e.ViolationId).HasName("PK__Violatio__18B6DC2862FD7CAD");
 
             entity.Property(e => e.ViolationId).HasColumnName("ViolationID");
             entity.Property(e => e.FineAmount).HasColumnType("decimal(10, 2)");

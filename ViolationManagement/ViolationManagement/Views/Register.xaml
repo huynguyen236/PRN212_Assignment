@@ -2,9 +2,10 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Đăng ký - Violation App"
-        Height="600" Width="900"
+        Height="650" Width="900"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanMinimize">
+
     <DockPanel>
 
         <!-- Taskbar -->
@@ -16,16 +17,17 @@
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,0">
                 <TextBlock Text="🚦 Violation App" 
-                    Foreground="White" 
-                    FontWeight="Bold" 
-                    FontSize="18"/>
+                           Foreground="White" 
+                           FontWeight="Bold" 
+                           FontSize="18"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0">
                 <Button Content="🏠 Trang chủ" Click="OpenHome" Style="{StaticResource NavButtonStyle}" />
-                <Button Content="📝 Đăng ký" Click="OpenRegister" Style="{StaticResource NavButtonStyle}" />
-                <Button Content="🔐 Đăng nhập" Click="OpenLogin" Style="{StaticResource NavButtonStyle}" />
-                <Button Content="🚪 Đăng xuất" Click="Logout" Style="{StaticResource NavButtonStyle}" />
+                <Button x:Name="BtnRegister" Content="📝 Đăng ký" Click="OpenRegister" Style="{StaticResource NavButtonStyle}" />
+                <Button x:Name="BtnLogin" Content="🔐 Đăng nhập" Click="OpenLogin" Style="{StaticResource NavButtonStyle}" />
+                <Button x:Name="BtnLogout" Content="🚪 Đăng xuất" Click="Logout" Style="{StaticResource NavButtonStyle}" />
+
             </StackPanel>
         </Grid>
 
@@ -41,37 +43,59 @@
                                    TextAlignment="Center"
                                    Margin="0,0,0,20"/>
 
+                        <!-- CCCD -->
+                        <StackPanel Margin="0,10">
+                            <TextBlock Text="Mã căn cước công dân:" FontWeight="SemiBold"/>
+                            <TextBox x:Name="CCCDTextBox" Height="30" />
+                        </StackPanel>
+
+                        <!-- Họ và tên -->
+                        <StackPanel Margin="0,10">
+                            <TextBlock Text="Họ và tên:" FontWeight="SemiBold"/>
+                            <TextBox x:Name="FullNameTextBox" Height="30" />
+                        </StackPanel>
+
+                        <!-- Giới tính -->
+                        <StackPanel Margin="0,10">
+                            <TextBlock Text="Giới tính:" FontWeight="SemiBold"/>
+                            <ComboBox x:Name="GenderComboBox" Height="30" SelectionChanged="GenderComboBox_SelectionChanged">
+                                <ComboBoxItem Content="Nam" />
+                                <ComboBoxItem Content="Nữ" />
+                                <ComboBoxItem Content="Khác" />
+                            </ComboBox>
+                        </StackPanel>
+
+                        <!-- Địa chỉ -->
+                        <StackPanel Margin="0,10">
+                            <TextBlock Text="Địa chỉ:" FontWeight="SemiBold"/>
+                            <TextBox x:Name="AddressTextBox" Height="30" />
+                        </StackPanel>
+
+                        <!-- Số điện thoại -->
+                        <StackPanel Margin="0,10">
+                            <TextBlock Text="Số điện thoại:" FontWeight="SemiBold"/>
+                            <TextBox x:Name="PhoneTextBox" Height="30" />
+                        </StackPanel>
+
                         <!-- Email -->
                         <StackPanel Margin="0,10">
                             <TextBlock Text="Email:" FontWeight="SemiBold"/>
                             <TextBox x:Name="EmailTextBox" Height="30" />
                         </StackPanel>
 
-                        <!-- Phone -->
-                        <StackPanel Margin="0,10">
-                            <TextBlock Text="Số điện thoại:" FontWeight="SemiBold"/>
-                            <TextBox x:Name="PhoneTextBox" Height="30" />
-                        </StackPanel>
-
-                        <!-- Full Name -->
-                        <StackPanel Margin="0,10">
-                            <TextBlock Text="Họ và tên:" FontWeight="SemiBold"/>
-                            <TextBox x:Name="FullNameTextBox" Height="30" />
-                        </StackPanel>
-
-                        <!-- Password -->
+                        <!-- Mật khẩu -->
                         <StackPanel Margin="0,10">
                             <TextBlock Text="Mật khẩu:" FontWeight="SemiBold"/>
                             <PasswordBox x:Name="PasswordBox" Height="30" />
                         </StackPanel>
 
-                        <!-- Confirm Password -->
+                        <!-- Xác nhận mật khẩu -->
                         <StackPanel Margin="0,10">
                             <TextBlock Text="Xác nhận mật khẩu:" FontWeight="SemiBold"/>
                             <PasswordBox x:Name="ConfirmPasswordBox" Height="30" />
                         </StackPanel>
 
-                        <!-- Register Button -->
+                        <!-- Nút đăng ký -->
                         <Button Content="Đăng ký"
                                 Background="#0D47A1"
                                 Foreground="White"

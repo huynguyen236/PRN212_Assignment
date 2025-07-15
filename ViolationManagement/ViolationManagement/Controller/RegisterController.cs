@@ -13,16 +13,31 @@ namespace ViolationManagement.Controllers
     {
         private readonly ViolationManagementContext _context = new();
 
-        public bool Register(string email, string phone, string fullName, string password, string confirmPassword, out string message)
+        public bool Register(string cccd, string email, string phone, string fullName, string gender, string address, string password, string confirmPassword, out string message)
         {
             message = "";
 
             // Validate trống
             if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(phone) ||
                 string.IsNullOrWhiteSpace(fullName) || string.IsNullOrWhiteSpace(password) ||
-                string.IsNullOrWhiteSpace(confirmPassword))
+                string.IsNullOrWhiteSpace(confirmPassword) || string.IsNullOrWhiteSpace(cccd) ||
+                 string.IsNullOrWhiteSpace(gender) || string.IsNullOrWhiteSpace(address) )
             {
                 message = "Vui lòng nhập đầy đủ thông tin.";
+                return false;
+            }
+
+            // Validate CCCD định dạng
+            if (string.IsNullOrWhiteSpace(cccd) || !Regex.IsMatch(cccd, @"^0\d{11}$"))
+            {
+                message = "Mã CCCD phải gồm 12 chữ số và bắt đầu bằng số 0.";
+                return false;
+            }
+
+            // Check cccd trùng
+            if (_context.Users.Any(u => u.CitizenId == cccd))
+            {
+                message = "Tài khoản của mã CCCD này đã tồn tại.";
                 return false;
             }
 
@@ -77,9 +92,12 @@ namespace ViolationManagement.Controllers
                 // Tạo đối tượng User mới
                 var newUser = new User
                 {
+                    CitizenId = cccd,
                     FullName = fullName,
                     Email = email,
                     Phone = phone,
+                    Gender = gender,
+                    Address = address,
                     Password = password,
                     Role = "Citizen"
                 };

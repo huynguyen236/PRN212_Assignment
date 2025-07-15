@@ -24,9 +24,10 @@
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0">
                 <Button Content="🏠 Trang chủ" Click="OpenHome" Style="{StaticResource NavButtonStyle}" />
-                <Button Content="📝 Đăng ký" Click="OpenRegister" Style="{StaticResource NavButtonStyle}" />
-                <Button Content="🔐 Đăng nhập" Click="OpenLogin" Style="{StaticResource NavButtonStyle}" />
-                <Button Content="🚪 Đăng xuất" Click="Logout" Style="{StaticResource NavButtonStyle}" />
+                <Button x:Name="BtnRegister" Content="📝 Đăng ký" Click="OpenRegister" Style="{StaticResource NavButtonStyle}" />
+                <Button x:Name="BtnLogin" Content="🔐 Đăng nhập" Click="OpenLogin" Style="{StaticResource NavButtonStyle}" />
+                <Button x:Name="BtnLogout" Content="🚪 Đăng xuất" Click="Logout" Style="{StaticResource NavButtonStyle}" />
+
             </StackPanel>
         </Grid>
 
@@ -42,10 +43,10 @@
                                    TextAlignment="Center"
                                    Margin="0,0,0,20"/>
 
-                        <!-- Email -->
+                        <!-- CCCD -->
                         <StackPanel Margin="0,10">
-                            <TextBlock Text="Email:" FontWeight="SemiBold"/>
-                            <TextBox x:Name="txtEmail" Height="30" />
+                            <TextBlock Text="Mã số Căn cước công dân:" FontWeight="SemiBold"/>
+                            <TextBox x:Name="txtCCCD" Height="30" />
                         </StackPanel>
 
                         <!-- Password -->

@@ -18,13 +18,16 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <!-- Logo -->
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="20,0,0,0">
-                <TextBlock Text="🚦 Violation App" 
+
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,0">
+                <TextBlock Text="👮 Violation App" 
+
                            Foreground="White" 
                            FontWeight="Bold" 
                            FontSize="18"/>
             </StackPanel>
+
 
             <!-- Feature ComboBox (Center) -->
             <ComboBox x:Name="FeatureComboBox"
@@ -47,6 +50,7 @@
                 <Button x:Name="btnRegister" Content="📝 Đăng ký" Click="OpenRegister" Style="{StaticResource NavButtonStyle}" Margin="5,0"/>
                 <Button x:Name="btnLogin" Content="🔐 Đăng nhập" Click="OpenLogin" Style="{StaticResource NavButtonStyle}" Margin="5,0"/>
                 <Button x:Name="btnLogout" Content="🚪 Đăng xuất" Click="Logout" Style="{StaticResource NavButtonStyle}" Margin="5,0"/>
+
             </StackPanel>
         </Grid>
 
