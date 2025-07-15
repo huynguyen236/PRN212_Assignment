@@ -24,7 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DAO\" />
+    <Folder Include="UploadedFiles\Images\" />
+    <Folder Include="UploadedFiles\Videos\" />
   </ItemGroup>
 
 </Project>

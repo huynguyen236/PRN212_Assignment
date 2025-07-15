@@ -1,12 +1,19 @@
-﻿using System.Windows;
+
+﻿using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows;
 using ViolationManagement.Controllers;
 using ViolationManagement.Helper;
+using ViolationManagement.Models;
+
 
 namespace ViolationManagement.Views
 {
     public partial class RegisterPage : Window
     {
+
         private readonly RegisterController _controller = new();
+
 
         public RegisterPage()
         {

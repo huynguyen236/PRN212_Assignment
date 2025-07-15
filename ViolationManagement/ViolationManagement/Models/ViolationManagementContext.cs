@@ -4,6 +4,9 @@ using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+
 namespace ViolationManagement.Models;
 
 public partial class ViolationManagementContext : DbContext

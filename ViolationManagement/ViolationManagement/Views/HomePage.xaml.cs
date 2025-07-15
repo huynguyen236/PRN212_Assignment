@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Windows;
+using System.Windows.Controls;
 using ViolationManagement.Helper;
 
 namespace ViolationManagement.Views
@@ -9,6 +10,15 @@ namespace ViolationManagement.Views
         public HomePage()
         {
             InitializeComponent();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            bool isLoggedIn = UserSession.CurrentUser != null;
+
+            btnLogin.Visibility = isLoggedIn ? Visibility.Collapsed : Visibility.Visible;
+            btnRegister.Visibility = isLoggedIn ? Visibility.Collapsed : Visibility.Visible;
+            btnLogout.Visibility = isLoggedIn ? Visibility.Visible : Visibility.Collapsed;
 
             LoadUserInfo();
         }
@@ -22,9 +32,9 @@ namespace ViolationManagement.Views
 
                 WelcomeText.Text = $"Xin chào, {name}!";
 
-                BtnRegister.Visibility = Visibility.Collapsed;
-                BtnLogin.Visibility = Visibility.Collapsed;
-                BtnLogout.Visibility = Visibility.Visible;
+                btnRegister.Visibility = Visibility.Collapsed;
+                btnLogin.Visibility = Visibility.Collapsed;
+                btnLogout.Visibility = Visibility.Visible;
 
                 switch (role)
                 {
@@ -38,48 +48,102 @@ namespace ViolationManagement.Views
                         CitizenPanel.Visibility = Visibility.Visible;
                         break;
                 }
+
+                // Cập nhật chức năng cho combobox
+                FeatureComboBox.Items.Clear();
+                FeatureComboBox.Visibility = Visibility.Visible;
+
+                if (role == "Citizen")
+                {
+                    FeatureComboBox.Items.Add(new ComboBoxItem { Content = "📄 Tra cứu", Tag = "Lookup" });
+                    FeatureComboBox.Items.Add(new ComboBoxItem { Content = "📝 Báo cáo vi phạm", Tag = "Report" });
+                    FeatureComboBox.Items.Add(new ComboBoxItem { Content = "🚗 Cập nhật xe", Tag = "UpdateCar" });
+                    FeatureComboBox.Items.Add(new ComboBoxItem { Content = "🚗 Xem báo cáo", Tag = "ReportList" });
+                }
+                else if (role == "Police" || role == "Admin")
+                {
+                    FeatureComboBox.Items.Add(new ComboBoxItem { Content = "📄 Tra cứu", Tag = "Lookup" });
+                }
             }
             else
             {
                 WelcomeText.Text = "Xin chào, khách!";
-                BtnRegister.Visibility = Visibility.Visible;
-                BtnLogin.Visibility = Visibility.Visible;
-                BtnLogout.Visibility = Visibility.Collapsed;
+                btnLogout.Visibility = Visibility.Collapsed;
+                FeatureComboBox.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void FeatureComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (FeatureComboBox.SelectedItem is ComboBoxItem selectedItem)
+            {
+                string tag = selectedItem.Tag?.ToString();
+
+                switch (tag)
+                {
+                    case "Lookup":
+                        OpenLookup(null, null);
+                        break;
+                    case "Report":
+                        OpenReport(null, null);
+                        break;
+                    case "UpdateCar":
+                        OpenUpdateCar(null, null);
+                        break;
+                    case "ReportList":
+                        ReportList(null, null); 
+                        break;
+
+
+                }
+
+                // Reset ComboBox để không giữ lựa chọn
+                FeatureComboBox.SelectedIndex = -1;
             }
         }
 
         private void OpenHome(object sender, RoutedEventArgs e)
         {
-            // nothing
-        }
-
-        private void OpenLookup(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Chức năng đang được phát triển.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+            // Đang ở trang chủ, không làm gì cả
         }
 
         private void OpenRegister(object sender, RoutedEventArgs e)
         {
-            var register = new RegisterPage();
-            register.Show();
+            new RegisterPage().Show();
             this.Close();
         }
 
         private void OpenLogin(object sender, RoutedEventArgs e)
         {
-            var login = new Login();
-            login.Show();
+            new Login().Show();
             this.Close();
         }
 
         private void Logout(object sender, RoutedEventArgs e)
         {
             UserSession.Logout();
+            MessageBox.Show("Bạn đã đăng xuất.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+            new Login().Show();
+            this.Close();
+        }
+        private void OpenReport(object sender, RoutedEventArgs e)
+        {
+            new Report().Show();
+            this.Close();
+        }
+        private void OpenUpdateCar(object sender, RoutedEventArgs e)
+        {
 
-            MessageBox.Show("Bạn đã đăng xuất.", "Đăng xuất", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        private void OpenLookup(object sender, RoutedEventArgs e)
+        {
 
-            var login = new Login();
-            login.Show();
+        }
+        
+
+       private void ReportList(object sender, RoutedEventArgs e)
+        {
+            new ReportList().Show();
             this.Close();
         }
     }
