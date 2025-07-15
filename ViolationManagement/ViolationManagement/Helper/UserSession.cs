@@ -23,6 +23,7 @@ namespace ViolationManagement.Helper
             CurrentUser = new ClaimsPrincipal(identity);
         }
 
+
         public static void Logout()
         {
             CurrentUser = null;

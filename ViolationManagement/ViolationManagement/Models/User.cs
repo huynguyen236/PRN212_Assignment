@@ -9,6 +9,8 @@ public partial class User
 
     public string FullName { get; set; } = null!;
 
+    public string CitizenId { get; set; } = null!;
+
     public string Email { get; set; } = null!;
 
     public string Password { get; set; } = null!;
@@ -16,6 +18,10 @@ public partial class User
     public string Role { get; set; } = null!;
 
     public string Phone { get; set; } = null!;
+
+    public string? Address { get; set; }
+
+    public string? Gender { get; set; }
 
     public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();
 
