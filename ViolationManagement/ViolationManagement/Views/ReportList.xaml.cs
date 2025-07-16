@@ -44,9 +44,36 @@ namespace ViolationManagement.Views
                 var reports = (selectedStatus == "All" || string.IsNullOrEmpty(selectedStatus))
                     ? _controller.GetReportsByUserId(userId)
                     : _controller.GetReportsByStatus(userId, selectedStatus);
-
                 dgReports.ItemsSource = reports;
             }
+        }
+        private void BtnViewDetail_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button && button.DataContext is Models.Report report)
+            {
+                var window = new ViewReport(report.ReportId);
+                window.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Không lấy được thông tin phản ánh");
+            }
+        }
+        private void OpenHome(object sender, RoutedEventArgs e)
+        {
+            HomePage hp = new HomePage();
+            hp.Show();
+            this.Close();
+        }
+        private void Logout(object sender, RoutedEventArgs e)
+        {
+            UserSession.Logout();
+
+            MessageBox.Show("Bạn đã đăng xuất.", "Đăng xuất", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            var login = new Login();
+            login.Show();
+            this.Close();
         }
 
     }

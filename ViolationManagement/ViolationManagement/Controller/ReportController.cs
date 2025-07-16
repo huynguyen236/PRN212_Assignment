@@ -177,6 +177,9 @@ namespace ViolationManagement.Controllers
                 .Where(r => r.ReporterId.ToString() == userId && r.Status == status)
                 .ToList();
         }
-
+        public Report? GetReportById(int reportId)
+        {
+            return _context.Reports.FirstOrDefault(r => r.ReportId == reportId);
+        }
     }
 }

@@ -6,7 +6,7 @@
         Background="#F8F9FA">
 
     <Window.Resources>
-        <!-- Định nghĩa style cho DataGrid -->
+        <!-- Style cho DataGrid -->
         <Style x:Key="DataGridStyle" TargetType="DataGrid">
             <Setter Property="Background" Value="White"/>
             <Setter Property="BorderBrush" Value="#E0E0E0"/>
@@ -23,7 +23,7 @@
             <Setter Property="SelectionUnit" Value="FullRow"/>
         </Style>
 
-        <!-- Style cho header -->
+        <!-- Header DataGrid -->
         <Style x:Key="DataGridColumnHeaderStyle" TargetType="DataGridColumnHeader">
             <Setter Property="Background" Value="#4A90E2"/>
             <Setter Property="Foreground" Value="White"/>
@@ -53,19 +53,27 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}">
                             <ContentPresenter HorizontalAlignment="Center" 
-                                            VerticalAlignment="Center"/>
+                                              VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#3A7BC8"/>
+                                <Setter Property="Background" Value="#4A90E2"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="#2E69A3"/>
+                                <Setter Property="Background" Value="#4A90E2"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+        </Style>
+
+        <!-- Style cho button trên thanh header -->
+        <Style x:Key="NavButtonStyle" TargetType="Button" BasedOn="{StaticResource ModernButton}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="FontSize" Value="13"/>
         </Style>
 
         <!-- Style cho search box -->
@@ -82,8 +90,7 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="4">
-                            <ScrollViewer x:Name="PART_ContentHost" 
-                                        Margin="{TemplateBinding Padding}"/>
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsFocused" Value="True">
@@ -105,80 +112,86 @@
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <Grid Grid.Row="0" Margin="0,0,0,20">
+        <Grid Grid.Row="0" Height="60" Margin="0,0,0,20">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#D32F2F" Offset="0"/>
+                    <GradientStop Color="#B71C1C" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0">
-                <TextBlock Text="Danh sách phản ánh của bạn" 
-                          FontSize="24" 
-                          FontWeight="SemiBold" 
-                          Foreground="#333333"
-                          Margin="0,0,0,5"/>
-                <TextBlock Text="Quản lý và theo dõi các phản ánh vi phạm giao thông" 
-                          FontSize="13" 
-                          Foreground="#666666"/>
+            <!-- Logo + tiêu đề -->
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="20,0,0,0">
+                <Border Background="White" CornerRadius="20" Width="35" Height="35" Margin="0,0,15,0">
+                    <TextBlock Text="📋" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="Danh sách phản ánh" Foreground="White" FontWeight="Bold" FontSize="18"/>
+                    <TextBlock Text="Các phản ánh bạn đã gửi" Foreground="#FFCDD2" FontSize="11"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Nút điều hướng -->
+            <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,20,0">
+                <Button x:Name="btnHome" Content="🏠 Trang chủ" Click="OpenHome" Style="{StaticResource NavButtonStyle}" Margin="5,0"/>
+                <Button x:Name="btnLogout" Content="🚪 Đăng xuất" Click="Logout" Style="{StaticResource NavButtonStyle}" Margin="5,0"/>
             </StackPanel>
         </Grid>
 
-        <!-- Search and Filter -->
+        <!-- Search và filter -->
         <Grid Grid.Row="1" Margin="0,0,0,15">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-            
                 <ColumnDefinition Width="Auto"/>
-             
                 <ColumnDefinition Width="200"/>
-               
                 <ColumnDefinition Width="Auto"/>
-               
             </Grid.ColumnDefinitions>
 
-            
             <TextBox x:Name="txtSearch"
-             Grid.Column="0"
-             Style="{StaticResource SearchTextBox}"
-             Height="35"
-             FontSize="13"
-             VerticalContentAlignment="Center"
-             Padding="10,0,10,0"
-             Margin="0,0,10,0"
-             Foreground="#333"
-             HorizontalAlignment="Stretch"/>
+                     Grid.Column="0"
+                     Style="{StaticResource SearchTextBox}"
+                     Height="35"
+                     FontSize="13"
+                     VerticalContentAlignment="Center"
+                     Padding="10,0,10,0"
+                     Margin="0,0,10,0"
+                     Foreground="#333"
+                     HorizontalAlignment="Stretch"/>
 
-            <!-- Nút tìm kiếm -->
             <Button Grid.Column="1"
-            Content="Tìm kiếm"
-            Width="100"
-            Height="35"
-            Margin="0,0,10,0"
-            Style="{StaticResource ModernButton}"
-            Click="BtnTimKiem_Click"/>
+                    Content="Tìm kiếm"
+                    Width="100"
+                    Height="35"
+                    Margin="0,0,10,0"
+                    Style="{StaticResource ModernButton}"
+                    Click="BtnTimKiem_Click"/>
 
-            <!-- ComboBox lọc trạng thái -->
             <ComboBox x:Name="cmbStatus"
-              Grid.Column="2"
-              Height="35"
-              FontSize="12"
-              Margin="0,0,10,0"
-              HorizontalAlignment="Left"
-              Width="180"
-              SelectedIndex="0">
+                      Grid.Column="2"
+                      Height="35"
+                      FontSize="12"
+                      Margin="0,0,10,0"
+                      HorizontalAlignment="Left"
+                      Width="180"
+                      SelectedIndex="0">
                 <ComboBoxItem Content="Tất cả trạng thái" Tag="All"/>
                 <ComboBoxItem Content="Chờ xử lý" Tag="Pending"/>
                 <ComboBoxItem Content="Đã xử lý" Tag="Approve"/>
                 <ComboBoxItem Content="Từ chối" Tag="Reject"/>
             </ComboBox>
 
-            <!-- Nút lọc -->
             <Button Grid.Column="3"
-            Content="Lọc"
-            Width="80"
-            Height="35"
-            Style="{StaticResource ModernButton}"
-            Click="BtnLoc_Click"/>
+                    Content="Lọc"
+                    Width="80"
+                    Height="35"
+                    Style="{StaticResource ModernButton}"
+                    Click="BtnLoc_Click"/>
         </Grid>
 
         <!-- DataGrid -->
@@ -188,24 +201,15 @@
                 CornerRadius="6"
                 Background="White">
             <DataGrid x:Name="dgReports" 
-          Style="{StaticResource DataGridStyle}"
-          AutoGenerateColumns="False" 
-          IsReadOnly="True"
-          FontFamily="Segoe UI"
-          FontSize="12"
-          Foreground="#333"
-          ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}">
+                      Style="{StaticResource DataGridStyle}"
+                      AutoGenerateColumns="False" 
+                      IsReadOnly="True"
+                      FontFamily="Segoe UI"
+                      FontSize="12"
+                      Foreground="#333"
+                      HeadersVisibility="Column"
+                      ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" Binding="{Binding ReportID}" Width="60">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="HorizontalAlignment" Value="Center"/>
-                                <Setter Property="VerticalAlignment" Value="Center"/>
-                                <Setter Property="FontWeight" Value="SemiBold"/>
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
-
                     <DataGridTextColumn Header="Loại vi phạm" Binding="{Binding ViolationType}" Width="150">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
@@ -218,14 +222,12 @@
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="HorizontalAlignment" Value="Center"/>
-                                <Setter Property="FontWeight" Value="SemiBold"/>
-                                <Setter Property="Background" Value="#F0F8FF"/>
                                 <Setter Property="Padding" Value="5,2"/>
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
 
-                    <DataGridTextColumn Header="Mô tả" Binding="{Binding Description}" Width="220">
+                    <DataGridTextColumn Header="Mô tả" Binding="{Binding Description}" Width="*">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="TextWrapping" Value="Wrap"/>
@@ -255,22 +257,27 @@
                     <DataGridTemplateColumn Header="Trạng thái" Width="100">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Border CornerRadius="12" 
-                            Padding="8,4"
-                            HorizontalAlignment="Center"
-                            Background="#E5E5E5">
-                                    <TextBlock Text="{Binding Status}" 
-                                
-                                   FontSize="12"
-                                   HorizontalAlignment="Center"
-                                   />
+                                <Border CornerRadius="12" Padding="8,4" HorizontalAlignment="Center" Background="#E5E5E5">
+                                    <TextBlock Text="{Binding Status}" FontSize="12" HorizontalAlignment="Center"/>
                                 </Border>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Chi tiết" Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Xem"
+                                        Style="{StaticResource ModernButton}"
+                                        Padding="8,2"
+                                        FontSize="12"
+                                        Click="BtnViewDetail_Click"
+                                        ToolTip="Xem chi tiết phản ánh"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-
         </Border>
     </Grid>
 </Window>
