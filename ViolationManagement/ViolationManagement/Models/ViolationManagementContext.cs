@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+
 
 namespace ViolationManagement.Models;
 
@@ -38,11 +41,14 @@ public partial class ViolationManagementContext : DbContext
         optionsBuilder.UseSqlServer(configuration.GetConnectionString("Default"));
     }
 
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Notification>(entity =>
         {
+
             entity.HasKey(e => e.NotificationId).HasName("PK__Notifica__20CF2E32A315757D");
+
 
             entity.Property(e => e.NotificationId).HasColumnName("NotificationID");
             entity.Property(e => e.IsRead).HasDefaultValue(false);
@@ -65,6 +71,7 @@ public partial class ViolationManagementContext : DbContext
 
         modelBuilder.Entity<Report>(entity =>
         {
+
             entity.HasKey(e => e.ReportId).HasName("PK__Reports__D5BD48E5E1D67B57");
 
             entity.Property(e => e.ReportId).HasColumnName("ReportID");
@@ -99,6 +106,7 @@ public partial class ViolationManagementContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
+
             entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCAC9B0D5B0E");
 
             entity.HasIndex(e => e.CitizenId, "UQ__Users__6E49FBEDFED33E41").IsUnique();
@@ -120,9 +128,11 @@ public partial class ViolationManagementContext : DbContext
 
         modelBuilder.Entity<Vehicle>(entity =>
         {
+
             entity.HasKey(e => e.VehicleId).HasName("PK__Vehicles__476B54B2C03A2E47");
 
             entity.HasIndex(e => e.PlateNumber, "UQ__Vehicles__0369262400C86D9A").IsUnique();
+
 
             entity.Property(e => e.VehicleId).HasColumnName("VehicleID");
             entity.Property(e => e.Brand).HasMaxLength(50);
@@ -138,6 +148,7 @@ public partial class ViolationManagementContext : DbContext
 
         modelBuilder.Entity<VehicleAddRequest>(entity =>
         {
+
             entity.HasKey(e => e.RequestId).HasName("PK__VehicleA__33A8519A243D51B9");
 
             entity.Property(e => e.RequestId).HasColumnName("RequestID");
@@ -165,7 +176,9 @@ public partial class ViolationManagementContext : DbContext
 
         modelBuilder.Entity<Violation>(entity =>
         {
+
             entity.HasKey(e => e.ViolationId).HasName("PK__Violatio__18B6DC2868EE4C39");
+
 
             entity.Property(e => e.ViolationId).HasColumnName("ViolationID");
             entity.Property(e => e.FineAmount).HasColumnType("decimal(10, 2)");
