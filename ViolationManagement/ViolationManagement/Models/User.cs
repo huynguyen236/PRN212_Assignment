@@ -29,6 +29,10 @@ public partial class User
 
     public virtual ICollection<Report> ReportReporters { get; set; } = new List<Report>();
 
+    public virtual ICollection<VehicleAddRequest> VehicleAddRequestApprovedByNavigations { get; set; } = new List<VehicleAddRequest>();
+
+    public virtual ICollection<VehicleAddRequest> VehicleAddRequestOwners { get; set; } = new List<VehicleAddRequest>();
+
     public virtual ICollection<Vehicle> Vehicles { get; set; } = new List<Vehicle>();
 
     public virtual ICollection<Violation> Violations { get; set; } = new List<Violation>();

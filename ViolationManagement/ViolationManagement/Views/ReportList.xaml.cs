@@ -29,8 +29,7 @@ namespace ViolationManagement.Views
         private void BtnTimKiem_Click(object sender, RoutedEventArgs e)
         {
             string keyword = txtSearch.Text.Trim();
-
-
+            keyword = string.Join(" ", keyword.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
             var reports = _controller.GetReportsByPlate(keyword);
 
             dgReports.ItemsSource = reports;

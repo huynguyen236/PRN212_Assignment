@@ -133,7 +133,8 @@ namespace ViolationManagement.Views
         }
         private void OpenUpdateCar(object sender, RoutedEventArgs e)
         {
-
+            AddVehicle av = new AddVehicle();
+            av.ShowDialog();
         }
         private void OpenLookup(object sender, RoutedEventArgs e)
         {
