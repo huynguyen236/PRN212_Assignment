@@ -4,7 +4,7 @@
         Title="Trang chủ - Violation App"
         Height="600" Width="900"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="CanMinimize"
+      
         Loaded="Window_Loaded"
         Background="#F5F5F5">
 

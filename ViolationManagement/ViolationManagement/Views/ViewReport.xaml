@@ -5,6 +5,7 @@
         Title="Chi tiết phản ánh"
         Height="650" Width="900"
         WindowStartupLocation="CenterScreen"
+         Closing="Window_Closing"
         Background="#F9F9F9">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">

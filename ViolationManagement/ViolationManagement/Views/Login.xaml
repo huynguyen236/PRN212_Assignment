@@ -3,8 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Đăng nhập - Violation App"
         Height="600" Width="900"
-        WindowStartupLocation="CenterScreen"
-        ResizeMode="CanMinimize">
+        WindowStartupLocation="CenterScreen">
 
     <DockPanel>
 

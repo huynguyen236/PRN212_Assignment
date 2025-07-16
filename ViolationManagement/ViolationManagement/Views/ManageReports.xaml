@@ -143,12 +143,19 @@
                     <DataGridTextColumn Header="Biển số" Binding="{Binding PlateNumber}" Width="100"/>
                     <DataGridTextColumn Header="Ngày báo cáo" Binding="{Binding ReportDate}" Width="130"/>
                     <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" Width="100"/>
-                    <DataGridTemplateColumn Header="Hành động" Width="150">
+                    <DataGridTemplateColumn Header="Hành động" Width="200">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Button Content="✔ Duyệt" Margin="5,0" Click="ApproveReport_Click"/>
-                                    <Button Content="✖ Từ chối" Margin="5,0" Click="RejectReport_Click"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                                    <Button Content="Xem" Margin="2" Padding="8,4"
+                        Background="#64B5F6" Foreground="White" FontWeight="Bold"
+                        Click="BtnViewDetail_Click"/>
+                                    <Button Content="✔ Duyệt" Margin="2" Padding="8,4"
+                        Background="#81C784" Foreground="White" FontWeight="Bold"
+                        Click="ApproveReport_Click"/>
+                                    <Button Content="✖ Từ chối" Margin="2" Padding="8,4"
+                        Background="#E57373" Foreground="White" FontWeight="Bold"
+                        Click="RejectReport_Click"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

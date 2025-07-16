@@ -125,5 +125,17 @@ namespace ViolationManagement.Views
             login.Show();
             this.Close();
         }
+        private void BtnViewDetail_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button && button.DataContext is Models.Report report)
+            {
+                var window = new ViewReport(report.ReportId);
+                window.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Không lấy được thông tin phản ánh");
+            }
+        }
     }
 }

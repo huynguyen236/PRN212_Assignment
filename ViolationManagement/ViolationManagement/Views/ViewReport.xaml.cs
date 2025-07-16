@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Media.Imaging;
@@ -110,6 +111,10 @@ namespace ViolationManagement.Views
         private void BtnPause_Click(object sender, RoutedEventArgs e)
         {
             _mediaPlayer?.Pause();
+        }
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            _mediaPlayer.Stop();
         }
     }
 }
