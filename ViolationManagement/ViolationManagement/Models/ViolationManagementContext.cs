@@ -1,11 +1,8 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace ViolationManagement.Models;
 
@@ -28,6 +25,8 @@ public partial class ViolationManagementContext : DbContext
 
     public virtual DbSet<Vehicle> Vehicles { get; set; }
 
+    public virtual DbSet<VehicleAddRequest> VehicleAddRequests { get; set; }
+
     public virtual DbSet<Violation> Violations { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -38,11 +37,15 @@ public partial class ViolationManagementContext : DbContext
         var configuration = builder.Build();
         optionsBuilder.UseSqlServer(configuration.GetConnectionString("Default"));
     }
+    //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+    //        => optionsBuilder.UseSqlServer("Server= DESKTOP-D77R1TJ;uid=sa;password=123;database=Violation_Management;Encrypt=True;TrustServerCertificate=True;");
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Notification>(entity =>
         {
-            entity.HasKey(e => e.NotificationId).HasName("PK__Notifica__20CF2E32E858FACC");
+            entity.HasKey(e => e.NotificationId).HasName("PK__Notifica__20CF2E32DBC012A8");
 
             entity.Property(e => e.NotificationId).HasColumnName("NotificationID");
             entity.Property(e => e.IsRead).HasDefaultValue(false);
@@ -65,7 +68,7 @@ public partial class ViolationManagementContext : DbContext
 
         modelBuilder.Entity<Report>(entity =>
         {
-            entity.HasKey(e => e.ReportId).HasName("PK__Reports__D5BD48E5C0206D23");
+            entity.HasKey(e => e.ReportId).HasName("PK__Reports__D5BD48E5E7892818");
 
             entity.Property(e => e.ReportId).HasColumnName("ReportID");
             entity.Property(e => e.ImageUrl).HasColumnName("ImageURL");
@@ -99,11 +102,11 @@ public partial class ViolationManagementContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCAC5FA704B8");
+            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCAC74DCC89A");
 
-            entity.HasIndex(e => e.CitizenId, "UQ__Users__6E49FBEDA330A1D7").IsUnique();
+            entity.HasIndex(e => e.CitizenId, "UQ__Users__6E49FBED54B4A907").IsUnique();
 
-            entity.HasIndex(e => e.Email, "UQ__Users__A9D10534887796A8").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Users__A9D10534A7A095F4").IsUnique();
 
             entity.Property(e => e.UserId).HasColumnName("UserID");
             entity.Property(e => e.Address).HasMaxLength(255);
@@ -120,9 +123,9 @@ public partial class ViolationManagementContext : DbContext
 
         modelBuilder.Entity<Vehicle>(entity =>
         {
-            entity.HasKey(e => e.VehicleId).HasName("PK__Vehicles__476B54B254D24460");
+            entity.HasKey(e => e.VehicleId).HasName("PK__Vehicles__476B54B21BD7E5EE");
 
-            entity.HasIndex(e => e.PlateNumber, "UQ__Vehicles__036926245E1E0D42").IsUnique();
+            entity.HasIndex(e => e.PlateNumber, "UQ__Vehicles__0369262451C70849").IsUnique();
 
             entity.Property(e => e.VehicleId).HasColumnName("VehicleID");
             entity.Property(e => e.Brand).HasMaxLength(50);
@@ -136,9 +139,36 @@ public partial class ViolationManagementContext : DbContext
                 .HasConstraintName("FK__Vehicles__OwnerI__3C69FB99");
         });
 
+        modelBuilder.Entity<VehicleAddRequest>(entity =>
+        {
+            entity.HasKey(e => e.RequestId).HasName("PK__VehicleA__33A8519A312AED61");
+
+            entity.Property(e => e.RequestId).HasColumnName("RequestID");
+            entity.Property(e => e.ApprovalDate).HasColumnType("datetime");
+            entity.Property(e => e.Brand).HasMaxLength(50);
+            entity.Property(e => e.Model).HasMaxLength(50);
+            entity.Property(e => e.OwnerId).HasColumnName("OwnerID");
+            entity.Property(e => e.PlateNumber).HasMaxLength(15);
+            entity.Property(e => e.RequestDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Status)
+                .HasMaxLength(20)
+                .HasDefaultValue("Pending");
+
+            entity.HasOne(d => d.ApprovedByNavigation).WithMany(p => p.VehicleAddRequestApprovedByNavigations)
+                .HasForeignKey(d => d.ApprovedBy)
+                .HasConstraintName("FK__VehicleAd__Appro__5535A963");
+
+            entity.HasOne(d => d.Owner).WithMany(p => p.VehicleAddRequestOwners)
+                .HasForeignKey(d => d.OwnerId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__VehicleAd__Owner__5441852A");
+        });
+
         modelBuilder.Entity<Violation>(entity =>
         {
-            entity.HasKey(e => e.ViolationId).HasName("PK__Violatio__18B6DC2862FD7CAD");
+            entity.HasKey(e => e.ViolationId).HasName("PK__Violatio__18B6DC28E6E181C2");
 
             entity.Property(e => e.ViolationId).HasColumnName("ViolationID");
             entity.Property(e => e.FineAmount).HasColumnType("decimal(10, 2)");

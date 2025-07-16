@@ -11,11 +11,13 @@ namespace ViolationManagement.Helper
     {
         public static ClaimsPrincipal? CurrentUser { get; set; }
 
-        public static void SetUser(int userId, string role)
+        public static void SetUser(int userId, string fullName, string email, string role)
         {
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
+                new Claim(ClaimTypes.Name, fullName),
+                new Claim(ClaimTypes.Email, email),
                 new Claim(ClaimTypes.Role, role)
             };
 
