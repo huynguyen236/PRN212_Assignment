@@ -40,7 +40,6 @@ namespace ViolationManagement.Views
             if (success)
             {
                 MessageBox.Show(message, "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
-                new Login().Show();
                 this.Close();
             }
             else
