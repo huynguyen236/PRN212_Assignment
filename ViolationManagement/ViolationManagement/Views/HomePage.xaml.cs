@@ -18,6 +18,7 @@ namespace ViolationManagement.Views
 
             btnLogin.Visibility = isLoggedIn ? Visibility.Collapsed : Visibility.Visible;
             btnRegister.Visibility = isLoggedIn ? Visibility.Collapsed : Visibility.Visible;
+            btnProfile.Visibility = isLoggedIn ? Visibility.Visible : Visibility.Collapsed;
             btnLogout.Visibility = isLoggedIn ? Visibility.Visible : Visibility.Collapsed;
 
             LoadUserInfo();
@@ -148,13 +149,12 @@ namespace ViolationManagement.Views
         {
 
         }
-        
-
-       private void ReportList(object sender, RoutedEventArgs e)
+        private void ViewProfile(object sender, RoutedEventArgs e)
         {
-            new ReportList().Show();
+            new ViewProfile().Show();
             this.Close();
         }
+
        private void ManageAccount(object sender, RoutedEventArgs e)
         {
             new ManageAccount().Show();
@@ -164,6 +164,5 @@ namespace ViolationManagement.Views
         {
             new ManageReports().Show();
             this.Close();
-        }
     }
 }
