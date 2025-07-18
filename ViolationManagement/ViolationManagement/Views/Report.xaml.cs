@@ -63,9 +63,9 @@ namespace ViolationManagement.Views
                 }
 
                 long fileSize = new FileInfo(selectedPath).Length;
-                if (fileSize > 10 * 1024 * 1024) // > 100MB
+                if (fileSize > 100 * 1024 * 1024) // > 100MB
                 {
-                    MessageBox.Show("Video vượt quá dung lượng cho phép (tối đa 10MB).", "Lỗi dung lượng", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Video vượt quá dung lượng cho phép (tối đa 100MB).", "Lỗi dung lượng", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 

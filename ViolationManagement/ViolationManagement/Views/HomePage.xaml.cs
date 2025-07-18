@@ -93,14 +93,14 @@ namespace ViolationManagement.Views
                     case "UpdateCar":
                         OpenUpdateCar(null, null);
                         break;
-                    case "ReportList":
-                        ReportList(null, null); 
-                        break;
                     case "ManageAccount":
-                        ManageAccount(null, null); 
+                        ManageAccount(null, null);
+                        break;
+                    case "ReportList":
+                        ReportList(null, null);
                         break;
                     case "ManageReport":
-                        ManageReport(null, null); 
+                        ManageReport(null, null);
                         break;
 
 
@@ -155,14 +155,21 @@ namespace ViolationManagement.Views
             this.Close();
         }
 
-       private void ManageAccount(object sender, RoutedEventArgs e)
+        private void ManageAccount(object sender, RoutedEventArgs e)
         {
             new ManageAccount().Show();
             this.Close();
         }
-       private void ManageReport(object sender, RoutedEventArgs e)
+        private void ManageReport(object sender, RoutedEventArgs e)
         {
             new ManageReports().Show();
             this.Close();
+        }
+        private void ReportList(object sender, RoutedEventArgs e)
+        {
+            new ReportList().Show();
+            this.Close();
+        }
     }
 }
+
