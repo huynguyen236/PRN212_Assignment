@@ -1,0 +1,122 @@
+﻿<Window x:Class="ViolationManagement.Views.ManageVehicleRequests"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ViolationManagement.Views"
+        mc:Ignorable="d"
+        Title="Duyệt yêu cầu thêm xe" Height="500" Width="1060">
+    <DockPanel LastChildFill="True">
+        <!-- Header giống trang quản lý báo cáo -->
+        <Grid DockPanel.Dock="Top" Height="60">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#D32F2F" Offset="0"/>
+                    <GradientStop Color="#B71C1C" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="20,0,0,0">
+                <Border Background="White" CornerRadius="20" Width="35" Height="35" Margin="0,0,15,0">
+                    <TextBlock Text="🚗" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="Duyệt yêu cầu thêm xe"
+                               Foreground="White" FontWeight="Bold" FontSize="18"/>
+                    <TextBlock Text="Danh sách yêu cầu từ người dùng"
+                               Foreground="#BBDEFB" FontSize="11"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,20,0">
+                <Button Content="🏠 Trang chủ" Click="OpenHome" Style="{StaticResource NavButtonStyle}" Margin="5,0"/>
+                <Button Content="🚪 Đăng xuất" Click="Logout" Style="{StaticResource NavButtonStyle}" Margin="5,0"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Bộ lọc -->
+            <StackPanel Orientation="Horizontal" Margin="0,10" Grid.Row="0" HorizontalAlignment="Left" >
+                <TextBox x:Name="txtSearch" Width="200" Height="30"/>
+                <ComboBox x:Name="cbStatusFilter" Width="130" Height="30" Margin="10,0" SelectedIndex="0">
+                    <ComboBoxItem Content="Tất cả"/>
+                    <ComboBoxItem Content="Pending"/>
+                    <ComboBoxItem Content="Approved"/>
+                    <ComboBoxItem Content="Rejected"/>
+                </ComboBox>
+                <Button Content="Lọc" Width="80" Height="30" Click="Search_Click" Background="#1976D2" Foreground="White" Margin="10,0"/>
+            </StackPanel>
+
+            <!-- Danh sách yêu cầu thêm xe -->
+            <DataGrid x:Name="dgRequests" AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="1" Margin="0,10">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding RequestID}" Width="50"/>
+                    <DataGridTextColumn Header="Chủ xe" Binding="{Binding Owner.FullName}" Width="150"/>
+                    <DataGridTextColumn Header="Biển số" Binding="{Binding PlateNumber}" Width="120"/>
+                    <DataGridTextColumn Header="Hãng xe" Binding="{Binding Brand}" Width="100"/>
+                    <DataGridTextColumn Header="Mẫu xe" Binding="{Binding Model}" Width="100"/>
+                    <DataGridTextColumn Header="Năm SX" Binding="{Binding ManufactureYear}" Width="80"/>
+                    <DataGridTextColumn Header="Ngày yêu cầu" Binding="{Binding RequestDate}" Width="130"/>
+                    <DataGridTextColumn Header="Trạng thái" Binding="{Binding Status}" Width="100"/>
+                    <DataGridTemplateColumn Header="Hành động" Width="180">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Button Content="✔ Duyệt" Margin="2" Padding="8,4" Background="#4CAF50" Foreground="White" FontWeight="Bold" Click="ApproveRequest_Click">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Status}" Value="Approved">
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Status}" Value="Rejected">
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+
+                                    <Button Content="✖ Từ chối" Margin="2" Padding="8,4" Background="#F44336" Foreground="White" FontWeight="Bold" Click="RejectRequest_Click">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Status}" Value="Approved">
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Status}" Value="Rejected">
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!-- Phân trang -->
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+                <Button Content="⬅ Trước" Click="PreviousPage_Click" Background="#E0E0E0"/>
+                <TextBlock x:Name="lblPageInfo" VerticalAlignment="Center" Margin="10,0"/>
+                <Button Content="Tiếp ➡" Click="NextPage_Click" Background="#E0E0E0"/>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</Window>

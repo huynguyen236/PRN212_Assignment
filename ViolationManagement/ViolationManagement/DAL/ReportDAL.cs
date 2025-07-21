@@ -50,6 +50,29 @@ namespace ViolationManagement.DAL
                 _context.SaveChanges();
             }
         }
+        public void UpdateReport(Report report)
+        {
+            _context.Reports.Update(report);
+            _context.SaveChanges();
+        }
+
+        public Vehicle GetVehicleByPlateNumber(string plateNumber)
+        {
+            return _context.Vehicles.FirstOrDefault(v => v.PlateNumber == plateNumber);
+        }
+
+        public void AddViolation(Violation violation)
+        {
+            _context.Violations.Add(violation);
+            _context.SaveChanges();
+        }
+
+        public void AddNotification(Notification notification)
+        {
+            _context.Notifications.Add(notification);
+            _context.SaveChanges();
+        }
+
 
         public void RejectReport(int reportId)
         {

@@ -62,11 +62,16 @@ namespace ViolationManagement.Views
                     FeatureComboBox.Items.Add(new ComboBoxItem { Content = "🚗 Xem báo cáo", Tag = "ReportList" });
                     FeatureComboBox.Items.Add(new ComboBoxItem { Content = "📄 Vi phạm của tôi", Tag = "MyViolation" });
                 }
-                else if (role == "Police" || role == "Admin")
+                else if (role == "Admin")
                 {
-                    FeatureComboBox.Items.Add(new ComboBoxItem { Content = "📄 Tra cứu", Tag = "Lookup" });
                     FeatureComboBox.Items.Add(new ComboBoxItem { Content = "Quản lí tài khoản", Tag = "ManageAccount" });
                     FeatureComboBox.Items.Add(new ComboBoxItem { Content = "Quản lí báo cáo vi phạm", Tag = "ManageReport" });
+                }
+                else if (role == "Police")
+                {
+                    FeatureComboBox.Items.Add(new ComboBoxItem { Content = "📄 Tra cứu", Tag = "Lookup" });
+                    FeatureComboBox.Items.Add(new ComboBoxItem { Content = "Quản lí báo cáo vi phạm", Tag = "ManageReport" });
+                    FeatureComboBox.Items.Add(new ComboBoxItem { Content = "Quản lí yêu cầu thêm xe", Tag = "ManageVehicleRequests" });
                 }
             }
             else
@@ -99,12 +104,16 @@ namespace ViolationManagement.Views
                         break;
                     case "ReportList":
                         ReportList(null, null);
+                    case "ManageAccount":
+                        ManageAccount(null, null);
                         break;
                     case "ManageReport":
                         ManageReport(null, null);
                         break;
                     case "MyViolation":
                         Myviolation(null, null);    
+                    case "ManageVehicleRequests":
+                        ManageVehicleRequests(null, null);
                         break;
 
 
@@ -153,12 +162,17 @@ namespace ViolationManagement.Views
         {
 
         }
+
         private void ViewProfile(object sender, RoutedEventArgs e)
+
+
+
+        private void ReportList(object sender, RoutedEventArgs e)
+
         {
             new ViewProfile().Show();
             this.Close();
         }
-
         private void ManageAccount(object sender, RoutedEventArgs e)
         {
             new ManageAccount().Show();
@@ -169,6 +183,7 @@ namespace ViolationManagement.Views
             new ManageReports().Show();
             this.Close();
         }
+
         private void ReportList(object sender, RoutedEventArgs e)
         {
             new ReportList().Show();
@@ -177,6 +192,11 @@ namespace ViolationManagement.Views
         private void Myviolation(object sender, RoutedEventArgs e)
         {
             new MyViolation().Show();
+
+        private void ManageVehicleRequests(object sender, RoutedEventArgs e)
+        {
+            new ManageVehicleRequests().Show();
+
             this.Close();
         }
     }
