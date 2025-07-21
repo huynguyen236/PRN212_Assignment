@@ -27,7 +27,7 @@ namespace ViolationManagement.Controller
         Description = v.Report.Description,
         FineDate = v.FineDate ?? DateTime.MinValue,
         FineAmount = v.FineAmount,
-        PaidStatus = v.PaidStatus ?? false
+        PaidStatus = v.PaidStatus
     }).ToList();
 
             return result;

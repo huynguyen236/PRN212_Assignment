@@ -17,7 +17,7 @@ public partial class Violation
 
     public DateTime? FineDate { get; set; }
 
-    public bool? PaidStatus { get; set; }
+    public bool PaidStatus { get; set; }
 
     public string? AppealMessage { get; set; }
 
