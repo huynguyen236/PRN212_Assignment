@@ -60,6 +60,7 @@ namespace ViolationManagement.Views
                     FeatureComboBox.Items.Add(new ComboBoxItem { Content = "📝 Báo cáo vi phạm", Tag = "Report" });
                     FeatureComboBox.Items.Add(new ComboBoxItem { Content = "🚗 Cập nhật xe", Tag = "UpdateCar" });
                     FeatureComboBox.Items.Add(new ComboBoxItem { Content = "🚗 Xem báo cáo", Tag = "ReportList" });
+                    FeatureComboBox.Items.Add(new ComboBoxItem { Content = "📄 Vi phạm của tôi", Tag = "MyViolation" });
                 }
                 else if (role == "Police" || role == "Admin")
                 {
@@ -101,6 +102,9 @@ namespace ViolationManagement.Views
                         break;
                     case "ManageReport":
                         ManageReport(null, null);
+                        break;
+                    case "MyViolation":
+                        Myviolation(null, null);    
                         break;
 
 
@@ -170,6 +174,12 @@ namespace ViolationManagement.Views
             new ReportList().Show();
             this.Close();
         }
+        private void Myviolation(object sender, RoutedEventArgs e)
+        {
+            new MyViolation().Show();
+            this.Close();
+        }
     }
+
 }
 
