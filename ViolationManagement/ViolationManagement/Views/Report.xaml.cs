@@ -90,7 +90,8 @@ namespace ViolationManagement.Views
             if (success)
             {
                 MessageBox.Show("Phản ánh đã được gửi!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
-                // Reset form nếu cần
+                new ReportList().Show();
+                this.Close();
             }
             else
             {
@@ -125,7 +126,8 @@ namespace ViolationManagement.Views
         }
        private void OpenUpdateCar(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Chức năng đang được phát triển.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+           new AddVehicle().Show();
+
         }
        
     }

@@ -26,7 +26,7 @@ namespace ViolationManagement.Controllers
             if (plateNumber.Contains('.'))
                 return false;
 
-            string pattern = @"^(?:[0-9]{2}[A-Z]{1}|[0-9]{2}[A-Z]{2})-[0-9]{5}$";
+            string pattern = @"^[0-9]{2}[A-Z0-9]{1,2}-[0-9]{5}$";
             return Regex.IsMatch(plateNumber, pattern);
         }
 
@@ -43,7 +43,7 @@ namespace ViolationManagement.Controllers
                 }
                 if (IsValidPlateNumber(plate) == false)
                 {
-                    message = "Biển số không hợp lệ, ví dụ(30A-55555).";
+                    message = "Biển số không hợp lệ, ví dụ(30A5-55555).";
                     return false;
                 }
 

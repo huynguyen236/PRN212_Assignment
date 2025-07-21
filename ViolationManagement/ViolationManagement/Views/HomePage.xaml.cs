@@ -104,14 +104,13 @@ namespace ViolationManagement.Views
                         break;
                     case "ReportList":
                         ReportList(null, null);
-                    case "ManageAccount":
-                        ManageAccount(null, null);
                         break;
                     case "ManageReport":
                         ManageReport(null, null);
                         break;
                     case "MyViolation":
-                        Myviolation(null, null);    
+                        Myviolation(null, null); 
+                        break;
                     case "ManageVehicleRequests":
                         ManageVehicleRequests(null, null);
                         break;
@@ -164,13 +163,17 @@ namespace ViolationManagement.Views
         }
 
         private void ViewProfile(object sender, RoutedEventArgs e)
+        {
+            new ViewProfile().Show();
+            this.Close();
+        }
 
 
 
         private void ReportList(object sender, RoutedEventArgs e)
 
         {
-            new ViewProfile().Show();
+           new ReportList().Show();
             this.Close();
         }
         private void ManageAccount(object sender, RoutedEventArgs e)
@@ -184,14 +187,12 @@ namespace ViolationManagement.Views
             this.Close();
         }
 
-        private void ReportList(object sender, RoutedEventArgs e)
-        {
-            new ReportList().Show();
-            this.Close();
-        }
+
         private void Myviolation(object sender, RoutedEventArgs e)
         {
             new MyViolation().Show();
+            this.Close();
+        }
 
         private void ManageVehicleRequests(object sender, RoutedEventArgs e)
         {
