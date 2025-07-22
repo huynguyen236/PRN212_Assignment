@@ -43,10 +43,12 @@ namespace ViolationManagement.Views
 
                 var reports = (selectedStatus == "All" || string.IsNullOrEmpty(selectedStatus))
                     ? _controller.GetReportsByUserId(userId)
-                    : _controller.GetReportsByStatus(userId, selectedStatus);
+                    : _controller.GetReportsByStatus(selectedStatus, userId);
                 dgReports.ItemsSource = reports;
             }
         }
+
+
         private void BtnViewDetail_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button button && button.DataContext is Models.Report report)

@@ -182,8 +182,8 @@
                       SelectedIndex="0">
                 <ComboBoxItem Content="Tất cả trạng thái" Tag="All"/>
                 <ComboBoxItem Content="Chờ xử lý" Tag="Pending"/>
-                <ComboBoxItem Content="Đã xử lý" Tag="Approve"/>
-                <ComboBoxItem Content="Từ chối" Tag="Reject"/>
+                <ComboBoxItem Content="Đã xử lý" Tag="Approved"/>
+                <ComboBoxItem Content="Từ chối" Tag="Rejected"/>
             </ComboBox>
 
             <Button Grid.Column="3"
