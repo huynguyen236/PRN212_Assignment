@@ -14,10 +14,6 @@ namespace ViolationManagement.Views
         private LibVLC _libVLC;
         private MediaPlayer _mediaPlayer;
 
-        public ViewReport()
-        {
-            InitializeComponent();
-        }
 
         public ViewReport(int reportId)
         {
@@ -61,7 +57,7 @@ namespace ViolationManagement.Views
                 {
                     MessageBox.Show($"Ảnh không tồn tại:\n{fullPath}");
                 }
-            }
+            }   
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi khi load ảnh:\n{ex.Message}");

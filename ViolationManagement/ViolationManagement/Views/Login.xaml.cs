@@ -85,8 +85,8 @@ namespace ViolationManagement.Views
         private void ForgotPassword_Click(object sender, MouseButtonEventArgs e)
         {
             var forgotpassword = new ForgotPassword();
-            forgotpassword.Show();
-            this.Close();
+            forgotpassword.ShowDialog();
+            //this.Close();
         }
 
         private void OpenRegister_Click(object sender, RoutedEventArgs e)
