@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using ViolationManagement.Controller;
 using ViolationManagement.Controllers;
 using ViolationManagement.Helper;
+using ViolationManagement.Models;
+using ViolationManagement.ViewModels;
 
 namespace ViolationManagement.Views
 {
@@ -23,19 +25,26 @@ namespace ViolationManagement.Views
     /// </summary>
     public partial class MyViolation : Window
     {
+        private List<MyViolationViewModel> allReports = new();
+        private int currentPage = 1;
+        private int pageSize = 10;
+        private int totalPages = 1;
+
+
         private readonly MyViolationController _controller = new();
         public MyViolation()
         {
             InitializeComponent();
             LoadReports();
+            currentPage = 1;
+            ApplyPaging();
         }
       
 
         private void LoadReports()
         {
             string? userId = UserSession.GetClaim(ClaimTypes.NameIdentifier);
-            var reports = _controller.GetReportsByUserId(userId);
-            dgViolations.ItemsSource = reports;
+            allReports = _controller.GetReportsByUserId(userId);
         }
 
         public bool PaidStatus { get; set; } // true: Đã thanh toán, false: Chưa thanh toán
@@ -79,6 +88,65 @@ namespace ViolationManagement.Views
             }
 
             dgViolations.ItemsSource = reports;
+        }
+
+
+
+        private void ApplyPaging()
+        {
+            var selectedItem = cbStatusFilter.SelectedItem as ComboBoxItem;
+            var selectedTag = selectedItem?.Tag?.ToString();
+
+            var filteredReports = allReports;
+
+            if (selectedTag != "All")
+            {
+                string selectedText = selectedItem.Content.ToString();
+                filteredReports = allReports
+                    .Where(v => string.Equals(v.PaidStatusText, selectedText, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+            }
+
+            totalPages = (int)Math.Ceiling((double)filteredReports.Count / pageSize);
+            if (totalPages == 0) totalPages = 1;
+            if (currentPage > totalPages) currentPage = totalPages;
+
+            var pagedReports = filteredReports
+                .Skip((currentPage - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            dgViolations.ItemsSource = pagedReports;
+            txtPageInfo.Text = $"Trang {currentPage} / {totalPages}";
+        }
+        private void FirstPage_Click(object sender, RoutedEventArgs e)
+        {
+            currentPage = 1;
+            ApplyPaging();
+        }
+
+        private void PreviousPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPage > 1)
+            {
+                currentPage--;
+                ApplyPaging();
+            }
+        }
+
+        private void NextPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPage < totalPages)
+            {
+                currentPage++;
+                ApplyPaging();
+            }
+        }
+
+        private void LastPage_Click(object sender, RoutedEventArgs e)
+        {
+            currentPage = totalPages;
+            ApplyPaging();
         }
 
     }

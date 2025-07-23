@@ -110,7 +110,7 @@ namespace ViolationManagement.Views
         }
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            _mediaPlayer.Stop();
+            _mediaPlayer?.Stop();
         }
     }
 }

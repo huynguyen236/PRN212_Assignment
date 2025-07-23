@@ -6,7 +6,6 @@
         Background="#F9FAFB">
 
     <Window.Resources>
-        <!-- Style cho nút taskbar -->
         <Style x:Key="NavButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="White"/>
@@ -28,7 +27,7 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#0D47A1    "/>
+                    <Setter Property="Background" Value="#0D47A1"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -39,10 +38,13 @@
             <RowDefinition Height="Auto"/>
             <!-- Taskbar -->
             <RowDefinition Height="Auto"/>
+            <!-- Title -->
             <RowDefinition Height="Auto"/>
-            <!-- Tiêu đề -->
+            <!-- Filter -->
             <RowDefinition Height="*"/>
-            <!-- DataGrid -->
+            <!-- DataGrid (co giãn) -->
+            <RowDefinition Height="Auto"/>
+            <!-- Pagination -->
         </Grid.RowDefinitions>
 
         <!-- 🔴 TASKBAR -->
@@ -54,7 +56,6 @@
                 </LinearGradientBrush>
             </DockPanel.Background>
 
-            <!-- Logo và Tiêu đề -->
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Left"
                         VerticalAlignment="Center" Margin="10,0">
                 <TextBlock Text="🚨" FontSize="18" Margin="0,0,5,0"/>
@@ -65,7 +66,6 @@
                            VerticalAlignment="Center"/>
             </StackPanel>
 
-            <!-- Các nút -->
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Right"
                        HorizontalAlignment="Right" Margin="0,0,20,0">
                 <Button x:Name="btnHome" Content="🏠 Trang chủ" Click="OpenHome"
@@ -80,6 +80,8 @@
                    Text="Các vi phạm đã được xử lý liên quan đến xe của bạn"
                    FontSize="18" FontWeight="Bold"
                    Margin="20,10,20,10"/>
+
+        <!-- Bộ lọc -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="20,0,20,10" VerticalAlignment="Center">
             <TextBlock Text="Lọc theo trạng thái: " VerticalAlignment="Center" Margin="0,0,10,0"/>
             <ComboBox x:Name="cbStatusFilter" Width="200" Margin="0,0,10,0">
@@ -91,7 +93,7 @@
         </StackPanel>
 
         <!-- Danh sách vi phạm -->
-        <DataGrid x:Name="dgViolations" Grid.Row="3" Margin="20,0,20,20"
+        <DataGrid x:Name="dgViolations" Grid.Row="3" Margin="20,0,20,10"
                   AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Biển số xe" Binding="{Binding PlateNumber}" Width="*"/>
@@ -99,8 +101,15 @@
                 <DataGridTextColumn Header="Mô tả" Binding="{Binding Description}" Width="2*"/>
                 <DataGridTextColumn Header="Ngày xử phạt" Binding="{Binding FineDate, StringFormat=dd/MM/yyyy}" Width="*"/>
                 <DataGridTextColumn Header="Tiền phạt" Binding="{Binding FineAmount}" Width="*"/>
-                <DataGridTextColumn Header="Trạng thái thanh toán" Binding="{Binding PaidStatusText }" Width="*"/>
+                <DataGridTextColumn Header="Trạng thái thanh toán" Binding="{Binding PaidStatusText}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
+
+        <!-- PHÂN TRANG -->
+        <StackPanel Grid.Row="4" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,0,0,10">
+            <Button Content="◀ Trước" Click="PreviousPage_Click" Margin="5"/>
+            <TextBlock x:Name="txtPageInfo" VerticalAlignment="Center" Margin="10,0"/>
+            <Button Content="Tiếp ▶" Click="NextPage_Click" Margin="5"/>
+        </StackPanel>
     </Grid>
 </Window>

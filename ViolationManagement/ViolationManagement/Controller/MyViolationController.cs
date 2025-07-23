@@ -18,17 +18,17 @@ namespace ViolationManagement.Controller
         public List<MyViolationViewModel> GetReportsByUserId(string userId)
         {
             var result = _context.Violations
-    .Include(v => v.Report) // cần using Microsoft.EntityFrameworkCore
-    .Where(v => v.ViolatorId.ToString() == userId)
-    .Select(v => new MyViolationViewModel
-    {
-        PlateNumber = v.PlateNumber,
-        Location = v.Report.Location,
-        Description = v.Report.Description,
-        FineDate = v.FineDate ?? DateTime.MinValue,
-        FineAmount = v.FineAmount,
-        PaidStatus = v.PaidStatus
-    }).ToList();
+                .Include(v => v.Report) 
+                .Where(v => v.ViolatorId.ToString() == userId)
+                .Select(v => new MyViolationViewModel
+                {
+                    PlateNumber = v.PlateNumber,
+                    Location = v.Report.Location,
+                    Description = v.Report.Description,
+                    FineDate = v.FineDate ?? DateTime.MinValue,
+                    FineAmount = v.FineAmount,
+                    PaidStatus = v.PaidStatus
+                }).ToList();
 
             return result;
         }

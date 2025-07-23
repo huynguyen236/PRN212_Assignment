@@ -279,5 +279,10 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Border>
+        <StackPanel Grid.Row="4" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,0,0,10">
+            <Button Content="◀ Trước" Click="PreviousPage_Click" Margin="5"/>
+            <TextBlock x:Name="txtPageInfo" VerticalAlignment="Center" Margin="10,0"/>
+            <Button Content="Tiếp ▶" Click="NextPage_Click" Margin="5"/>
+        </StackPanel>
     </Grid>
 </Window>
