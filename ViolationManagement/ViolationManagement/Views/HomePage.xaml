@@ -128,18 +128,7 @@
                             <TextBlock Text="Cảnh sát xác minh và gửi thông báo." FontSize="14" VerticalAlignment="Center"/>
                         </StackPanel>
                     </Border>
-
-                    <Border Background="White" CornerRadius="10" Padding="10" Margin="5">
-                        <Border.Effect>
-                            <DropShadowEffect Color="Gray" BlurRadius="8" ShadowDepth="2"/>
-                        </Border.Effect>
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <TextBlock Text="💳" FontSize="24" Margin="0,0,10,0"/>
-                            <TextBlock Text="Nộp phạt online dễ dàng." FontSize="14" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </Border>
                 </WrapPanel>
-
                 <!-- Footer -->
                 <TextBlock Text="Phiên bản 1.0 - Violation App © 2024"
                            FontSize="12"
