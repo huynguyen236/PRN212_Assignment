@@ -69,27 +69,15 @@ namespace ViolationManagement.Views
 
                     FeatureComboBox.Items.Add(new ComboBoxItem { Content = "Quản lí tài khoản", Tag = "ManageAccount" });
                     FeatureComboBox.Items.Add(new ComboBoxItem { Content = "Quản lí báo cáo vi phạm", Tag = "ManageReport" });
-                    FeatureComboBox.Items.Add(new ComboBoxItem { Content = "Danh sách vi phạm", Tag = "ViolationList" });
-
-                    FeatureComboBox.Items.Add(new ComboBoxItem { Content = "Báo cáo vi phạm", Tag = "Report" });
-                    FeatureComboBox.Items.Add(new ComboBoxItem { Content = "Thêm phương tiện", Tag = "UpdateCar" });
-                    FeatureComboBox.Items.Add(new ComboBoxItem { Content = "Xem báo cáo của tôi", Tag = "ReportList" });
-                    FeatureComboBox.Items.Add(new ComboBoxItem { Content = "Vi phạm của tôi", Tag = "MyViolation" });
+                    FeatureComboBox.Items.Add(new ComboBoxItem { Content = "Danh sách vi phạm", Tag = "ViolationList" });                   
 
                 }
                 else if (role == "Police")
                 {
                     FeatureComboBox.Items.Add(new ComboBoxItem { Content = "Thông báo của tôi", Tag = "NotificationList" });  // MỚI
-
-                    FeatureComboBox.Items.Add(new ComboBoxItem { Content = "Tra cứu", Tag = "Lookup" });
                     FeatureComboBox.Items.Add(new ComboBoxItem { Content = "Quản lí báo cáo vi phạm", Tag = "ManageReport" });
                     FeatureComboBox.Items.Add(new ComboBoxItem { Content = "Quản lí yêu cầu thêm xe", Tag = "ManageVehicleRequests" });
                     FeatureComboBox.Items.Add(new ComboBoxItem { Content = "Danh sách vi phạm", Tag = "ViolationList" });
-
-                    FeatureComboBox.Items.Add(new ComboBoxItem { Content = "Báo cáo vi phạm", Tag = "Report" });
-                    FeatureComboBox.Items.Add(new ComboBoxItem { Content = "Thêm phương tiện", Tag = "UpdateCar" });
-                    FeatureComboBox.Items.Add(new ComboBoxItem { Content = "Xem báo cáo của tôi", Tag = "ReportList" });
-                    FeatureComboBox.Items.Add(new ComboBoxItem { Content = "Vi phạm của tôi", Tag = "MyViolation" });
 
                 }
             }
