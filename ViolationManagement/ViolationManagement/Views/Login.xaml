@@ -1,0 +1,92 @@
+﻿<Window x:Class="ViolationManagement.Views.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Đăng nhập - Violation App"
+        Height="600" Width="900"
+        WindowStartupLocation="CenterScreen">
+
+    <DockPanel>
+
+        <!-- Taskbar -->
+        <Grid DockPanel.Dock="Top" Background="#B71C1C" Height="50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,0">
+                <TextBlock Text="🚦 Violation App" 
+                    Foreground="White" 
+                    FontWeight="Bold" 
+                    FontSize="18"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0">
+                <Button Content="🏠 Trang chủ" Click="OpenHome" Style="{StaticResource NavButtonStyle}" />
+                <Button x:Name="BtnRegister" Content="📝 Đăng ký" Click="OpenRegister" Style="{StaticResource NavButtonStyle}" />
+                <Button x:Name="BtnLogin" Content="🔐 Đăng nhập" Click="OpenLogin" Style="{StaticResource NavButtonStyle}" />
+                <Button x:Name="BtnLogout" Content="🚪 Đăng xuất" Click="Logout" Style="{StaticResource NavButtonStyle}" />
+
+            </StackPanel>
+        </Grid>
+
+        <!-- Main Content -->
+        <ScrollViewer>
+            <StackPanel Background="#F0F0F0" Margin="20">
+                <Border Background="White" CornerRadius="10" Padding="30" Margin="0,50,0,0">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="🔐 Đăng nhập"
+                                   FontSize="24"
+                                   FontWeight="Bold"
+                                   Foreground="#0D47A1"
+                                   TextAlignment="Center"
+                                   Margin="0,0,0,20"/>
+
+                        <!-- CCCD -->
+                        <StackPanel Margin="0,10">
+                            <TextBlock Text="Mã số Căn cước công dân:" FontWeight="SemiBold"/>
+                            <TextBox x:Name="txtCCCD" Height="30" />
+                        </StackPanel>
+
+                        <!-- Password -->
+                        <StackPanel Margin="0,10">
+                            <TextBlock Text="Mật khẩu:" FontWeight="SemiBold"/>
+                            <PasswordBox x:Name="txtPassword" Height="30"/>
+                        </StackPanel>
+
+                        <!-- Forgot Password -->
+                        <TextBlock Text="Quên mật khẩu?"
+                                   Foreground="#1565C0"
+                                   FontSize="12"
+                                   Margin="0,5,0,10"
+                                   Cursor="Hand"
+                                   MouseLeftButtonUp="ForgotPassword_Click"/>
+
+                        <!-- Confirm Button -->
+                        <Button Content="Xác nhận"
+                                Background="#0D47A1"
+                                Foreground="White"
+                                FontWeight="Bold"
+                                Height="35"
+                                Margin="0,10,0,5"
+                                Click="Login_Click"/>
+
+                        <!-- Register Button -->
+                        <Button Content="Đăng ký"
+                                Background="#BDBDBD"
+                                Foreground="Black"
+                                Height="30"
+                                Click="OpenRegister_Click"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Footer -->
+                <TextBlock Text="Phiên bản 1.0 - Violation App © 2024" 
+                           FontSize="12" 
+                           Foreground="Gray" 
+                           HorizontalAlignment="Center"
+                           Margin="0,30,0,0"/>
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
+</Window>

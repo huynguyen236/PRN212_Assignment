@@ -1,0 +1,34 @@
+﻿<Window x:Class="ViolationManagement.Views.AddVehicle"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Thêm phương tiện" Height="400" Width="400"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Biển số:" Grid.Row="0" Margin="0,0,0,5"/>
+        <TextBox x:Name="txtPlate" Grid.Row="1" Height="30" Margin="0,0,0,10"/>
+
+        <TextBlock Text="Hãng xe:" Grid.Row="2" Margin="0,0,0,5"/>
+        <TextBox x:Name="txtBrand" Grid.Row="3" Height="30" Margin="0,0,0,10"/>
+
+        <TextBlock Text="Dòng xe:" Grid.Row="4" Margin="0,0,0,5"/>
+        <TextBox x:Name="txtModel" Grid.Row="5" Height="30" Margin="0,0,0,10"/>
+
+        <TextBlock Text="Năm sản xuất:" Grid.Row="6" Margin="0,0,0,5"/>
+        <TextBox x:Name="txtYear" Grid.Row="7" Height="30" Margin="0,0,0,10"/>
+
+        <Button Content="Thêm xe" Grid.Row="7" Height="35" Margin="0,37,0,-27"
+                Click="BtnAddVehicle_Click"/>
+    </Grid>
+</Window>
